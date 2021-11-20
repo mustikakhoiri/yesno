@@ -33,7 +33,49 @@ if (isset($_POST['kirim'])) {
   $run_insert = mysqli_query($con, $insert);
 }
 
+//Kirim Pertanyaan
+if (isset($_POST['kirim'])) {
+  $kirimPertanyaan = $_POST['pertanyaan'];
+
+  $insert = "INSERT INTO tb_pertanyaan(pertanyaan) VALUES('$kirimPertanyaan')";
+
+  $run_insert = mysqli_query($con, $insert);
+}
+
+
 //Kirim Jawaban
-if(isset($_GET['jwb_iya'])) {
-    $jwb_id = $_GET['jwb_iya'];
+//Jawaban iya
+if (isset($_GET['jwb_iya'])) {
+  $jwb_id = $_GET['jwb_iya'];
+  $edit_id = $_GET['jwbbenar'];
+
+  $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
+  $run = mysqli_query($con, $select);
+  $row_pertanyaan = mysqli_fetch_array($run);
+  $pertanyaan = $row_pertanyaan['pertanyaan'];
+  $jwb_iya = $row_pertanyaan['jwb_iya'];
+
+  $update = "UPDATE tb_pertanyaan SET jwb_iya=jwb_iya +1 WHERE id_pertanyaan = '$edit_id'";
+
+  $run_update = mysqli_query($con, $update);
+  header("Location: index.php");
+  die();
+}
+
+//Jawaban Tidak
+if (isset($_GET['jwbsalah'])) {
+
+  $edit_id = $_GET['jwbsalah'];
+
+  $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
+  $run = mysqli_query($con, $select);
+  $row_pertanyaan = mysqli_fetch_array($run);
+  $pertanyaan = $row_pertanyaan['pertanyaan'];
+  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
+
+  $update = "UPDATE tb_pertanyaan SET jwb_tidak=jwb_tidak +1 WHERE id_pertanyaan = '$edit_id'";
+
+  $run_update = mysqli_query($con, $update);
+  header("Location: index.php");
+  die();
 }
