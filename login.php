@@ -10,29 +10,57 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php
-    require('config.php');
+
+<?php
+    require_once("config.php");
+
+    if(isset($_POST['submit-login'])){
+
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+    $sql = "SELECT * FROM tb_user WHERE username=:username OR email=:email";
+    $stmt = $con->prepare($sql);
+    
+    // bind parameter ke query
+    $params = array(
+        ":username" => $username,
+        ":email" => $username
+    );
+
+    $stmt->execute($params);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // jika user terdaftar
+    if($user){
+        // verifikasi password
+        if(password_verify($password, $user["password"])){
+            // buat Session
+            session_start();
+            $_SESSION["user"] = $user;
+
+            header("location: index.php");
+        }
+    }
+}
+?>
 
 
-
-    ?>
 
     <div class="registration-form">
-        <form>
+        <form action="" method="POST">
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="username" placeholder="Username">
+                <input type="text" class="form-control item" name="username" id="username" placeholder="Username">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="email" placeholder="Email">
+                <input type="password" class="form-control item" name="password" id="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Login</button>
+                <button type="submit" name="submit-login" class="btn btn-block create-account">Login</button>
             </div>
              <div>
                 <center><p>Belum punya akun? &nbsp; <a href="register.php">Register</a></p></center>

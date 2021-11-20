@@ -9,33 +9,65 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <?php
-    require('config.php');
+    require_once("config.php");
+
+if(isset($_POST['submit-register'])){
+
+    // filter data yang diinputkan
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    // enkripsi password
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 
+    // menyiapkan query
+    $sql = "INSERT INTO tb_user (name, username, email, password) 
+            VALUES (:name, :username, :email, :password)";
+    $stmt = $con->prepare($sql);
 
-    ?>
+    // bind parameter ke query
+    $params = array(
+        ":name" => $name,
+        ":username" => $username,
+        ":email" => $email,
+        ":password" => $password
+    );
 
+    // eksekusi query untuk menyimpan ke database
+    $saved = $stmt->execute($params);
+
+    // jika query simpan berhasil, maka user sudah terdaftar
+    // maka alihkan ke halaman login
+    if($saved) header("Location: login.php");
+}
+
+?>
     <div class="registration-form">
-        <form>
+        <form  action="register.php" method="POST">
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="name" placeholder="Nama">
+                <input type="text" class="form-control item" name="name" id="name" placeholder="Nama">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="username" placeholder="Username">
+                <input type="text" class="form-control item" name="username" id="username" placeholder="Username">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="email" placeholder="Email">
+                <input type="email" class="form-control item" name="email" id="email" placeholder="Email">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="password" placeholder="Password">
+                <input type="password" class="form-control item" name="password" id="password" placeholder="Password">
             </div>
+            <!-- <div class="form-group">
+                <input type="password" class="form-control item" name="repassword" id="repassword" placeholder="Re-Password">
+            </div> -->
             <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Buat Akun</button>
+                <button type="submit" name="submit-register" class="btn btn-block create-account">Buat Akun</button>
             </div>
             <div>
                 <center><p>Sudah punya akun? &nbsp; <a href="login.php">Login</a></p></center>
@@ -47,5 +79,3 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-
-

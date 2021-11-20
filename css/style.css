@@ -83,6 +83,10 @@ body{
     opacity: 0.6;
 }
 
+.login-form{
+    padding: 50px 0;
+}
+
 @media (max-width: 576px) {
     .registration-form form{
         padding: 50px 20px;
