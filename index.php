@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION["user"])) header("Location: login.php");
+if(!isset($_SESSION["username_user"])) header("Location: login.php");
 
 ?>
 
@@ -271,7 +271,7 @@ if(!isset($_SESSION["user"])) header("Location: login.php");
                       <i class="material-icons">note_add</i> Add New Post</a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">
+                    <a class="dropdown-item text-danger" href="logout.php">
                       <i class="material-icons text-danger">&#xE879;</i> Logout
                     </a>
                   </div>
