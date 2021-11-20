@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <title>True or False</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -14,20 +15,20 @@
     <?php
     require_once("config.php");
     error_reporting(0);
- 
+
     session_start();
-    
+
     if (isset($_SESSION['username_user'])) {
-        header("Location: index.php");
+        header("Location: dashboard.php");
     }
-    
+
     if (isset($_POST['submit-register'])) {
         $name = $_POST['nama_user'];
         $username = $_POST['username_user'];
         $email = $_POST['email_user'];
         $password = md5($_POST['password_user']);
         $cpassword = md5($_POST['cpassword']);
-    
+
         if ($password == $cpassword) {
             $sql = "SELECT * FROM tb_user WHERE username_user ='$username'";
             $result = mysqli_query($con, $sql);
@@ -52,38 +53,62 @@
             echo "<script>alert('Password Tidak Sesuai')</script>";
         }
     }
-?>
+    ?>
 
-    <div class="registration-form">
-        <form  action="register.php" method="POST">
-            <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
+
+    <main class="site-main mt-lg-3 mb-lg-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="col-sm-12 text-center mb-3">
+                        <a class="navbar-brand" href="index.php">
+                            <img src="images/instruktur.svg" width="100" alt="logo"></a>
+                    </div>
+                    <div class="card row card-signin flex-row px-3">
+                        <div class="card-body col-md-6">
+                            <h5 class="card-title text-center">Daftar Akun</h5>
+                            <form class="form-signin" action="register.php" method="POST">
+                                <div class="form-icon">
+                                    <span><i class="icon icon-user"></i></span>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="text" id="nama_user" name="nama_user" class="form-control" placeholder="Masukkan Nama Lengkap" autofocus required>
+                                    <label for="nama_user">Nama Lengkap</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required>
+                                    <label for="username_user">Username</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="email" id="email_user" name="email_user" class="form-control" placeholder="Masukkan Email" autofocus required>
+                                    <label for="email_user">Email</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required>
+                                    <label for="password_user">Kata Sandi</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="password" id="cpassword" name="cpassword" class="form-control" placeholder="Masukkan Ulang Kata Sandi" autofocus required>
+                                    <label for="cpassword">Ulang Kata Sandi</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <button type="submit" name="submit-register" class="btn btn-lg btn-primary btn-block text-uppercase">Buat Akun</button>
+                                </div>
+                                <div class="text-center">
+                                    <p>Sudah punya akun? <a href="login.php">Masuk</a></p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 d-none d-md-flex">
+                            <img src="images/instruktur.svg" class="card-img" alt="gambar">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" name="nama_user" id="nama_user" placeholder="Nama">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" name="username_user" id="username_user" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control item" name="email_user" id="email_user" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" name="password_user" id="password_user" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" name="cpassword" id="cpassword" placeholder="Re-Password">
-            </div>
-            <div class="form-group">
-                <button type="submit" name="submit-register" class="btn btn-block create-account">Buat Akun</button>
-            </div>
-            <div>
-                <center><p>Sudah punya akun? &nbsp; <a href="login.php">Login</a></p></center>
-            </div>
-        </form>
-    </div>
+        </div>
+    </main>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="assets/js/script.js"></script>
 </body>
+
 </html>

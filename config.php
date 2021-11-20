@@ -15,9 +15,9 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$db = "truefalse"; 
+$db = "truefalse";
 
-$con = mysqli_connect($host, $username, $password, $db) or die(); 
+$con = mysqli_connect($host, $username, $password, $db) or die();
 
 //Menampilkan Pertanyaan
 $select = "SELECT * FROM tb_pertanyaan";
@@ -50,7 +50,7 @@ if (isset($_GET['jwb_iya'])) {
   $update = "UPDATE tb_pertanyaan SET jwb_iya=jwb_iya +1 WHERE id_pertanyaan = '$edit_id'";
 
   $run_update = mysqli_query($con, $update);
-  header("Location: index.php");
+  header("Location: dashboard.php");
   die();
 }
 
@@ -67,6 +67,6 @@ if (isset($_GET['jwb_tidak'])) {
   $update = "UPDATE tb_pertanyaan SET jwb_tidak=jwb_tidak +1 WHERE id_pertanyaan = '$edit_id'";
 
   $run_update = mysqli_query($con, $update);
-  header("Location: index.php");
+  header("Location: dashboard.php");
   die();
 }

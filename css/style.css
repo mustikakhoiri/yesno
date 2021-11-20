@@ -1,101 +1,299 @@
-body{
-    background-color: #dee9ff;
+body {
+  background-color: #dee9ff;
 }
 
-.registration-form{
-	padding: 50px 0;
+/* LOGIN AND REGISTER  STYLE */
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
 }
 
-.registration-form form{
-    background-color: #fff;
-    max-width: 600px;
-    margin: auto;
-    padding: 50px 70px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+
+  /* overflow: hidden; */
 }
 
-.registration-form .form-icon{
-	text-align: center;
-    background-color: #5891ff;
-    border-radius: 50%;
-    font-size: 40px;
-    color: white;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    margin-bottom: 50px;
-    line-height: 100px;
+.form-icon {
+  text-align: center;
+  background-color: #5891ff;
+  border-radius: 50%;
+  font-size: 40px;
+  color: white;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 40px;
+  line-height: 100px;
 }
 
-.registration-form .item{
-	border-radius: 20px;
-    margin-bottom: 25px;
-    padding: 10px 20px;
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: bold;
+  font-size: 1.75rem;
 }
 
-.registration-form .create-account{
-    border-radius: 30px;
-    padding: 10px 20px;
+/* .card-signin .card-img-left {
+      width: 45%;
+      background: url(assets/dist/img/combi.svg);
+      background-size: cover;
+  } */
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: 0.1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+}
+
+.form-label-group > input,
+.form-label-group > label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #777;
+}
+
+/* header */
+#header {
+  transition: all 0.5s;
+  z-index: 997;
+  transition: all 0.5s;
+  padding: 15px 0;
+  background: rgba(255, 255, 255, 0.95);
+}
+#header.header-transparent {
+  background: transparent;
+}
+#header.header-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#header .logo h1 {
+  font-size: 30px;
+  margin: 0;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+#header .logo h1 a,
+#header .logo h1 a:hover {
+  color: #5777ba;
+  text-decoration: none;
+}
+#header .logo img {
+  margin: 0;
+  max-height: 40px;
+}
+
+/**
+* Desktop Navigation 
+*/
+.navbar {
+  padding: 0;
+}
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.navbar li {
+  position: relative;
+}
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  color: #47536e;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+.navbar a i,
+.navbar a:focus i {
+  font-size: 18px;
+  line-height: 0;
+  margin-left: 5px;
+}
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover > a {
+  color: #5777ba;
+}
+.navbar .login,
+.navbar .login:focus {
+  background: #5891ff;
+  color: #fff;
+  padding: 12px 25px;
+  margin-left: 30px;
+  color: #fff;
+  line-height: 1;
+  border-radius: 50px;
+}
+.navbar .login:hover,
+.navbar .login:focus:hover {
+  background: #748ec6;
+  color: #fff;
+}
+
+/* HERO SECTION */
+#hero {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 190px 0 100px 0;
+}
+/* #hero::before {
+  content: "";
+  position: absolute;
+  left: -300px;
+  width: 250%;
+  height: 200%;
+  z-index: -1;
+  background-color: #515f7d;
+  transform: skewY(160deg);
+} */
+#hero h1 {
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+  color: #5777ba;
+  font-family: "Poppins", sans-serif;
+}
+#hero h2 {
+  color: #515f7d;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+#hero .download-btn {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  display: inline-block;
+  padding: 10px 30px 10px 30px;
+  border-radius: 3px;
+  transition: 0.5s;
+  color: #fff;
+  background: #5891ff;
+  position: relative;
+  text-decoration: none;
+}
+#hero .download-btn:hover {
+  background: #5777ba;
+}
+/* #hero .download-btn i {
+  font-size: 20px;
+  position: absolute;
+  left: 18px;
+  top: 8.5px;
+} */
+#hero .download-btn + .download-btn {
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  #hero {
+    text-align: center;
+  }
+  #hero .download-btn + .download-btn {
+    margin: 0 10px;
+  }
+  #hero .hero-img {
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 60%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
     font-size: 18px;
-    font-weight: bold;
-    background-color: #5791ff;
-    border: none;
-    color: white;
-    margin-top: 20px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
 }
-
-.registration-form .social-media{
-    max-width: 600px;
-    background-color: #fff;
-    margin: auto;
-    padding: 35px 0;
-    text-align: center;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    color: #9fadca;
-    border-top: 1px solid #dee9ff;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-}
-
-.registration-form .social-icons{
-    margin-top: 30px;
-    margin-bottom: 16px;
-}
-
-.registration-form .social-icons a{
-    font-size: 23px;
-    margin: 0 3px;
-    color: #5691ff;
-    border: 1px solid;
-    border-radius: 50%;
-    width: 45px;
-    display: inline-block;
-    height: 45px;
-    text-align: center;
-    background-color: #fff;
-    line-height: 45px;
-}
-
-.registration-form .social-icons a:hover{
-    text-decoration: none;
-    opacity: 0.6;
-}
-
-.login-form{
-    padding: 50px 0;
-}
-
-@media (max-width: 576px) {
-    .registration-form form{
-        padding: 50px 20px;
-    }
-
-    .registration-form .form-icon{
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        line-height: 70px;
-    }
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
 }
