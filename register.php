@@ -12,7 +12,7 @@
 
 <body>
     <?php
-    require_once("config.php");
+    require_once("config_login.php");
 
 if(isset($_POST['submit-register'])){
 
