@@ -40,14 +40,17 @@ if (isset($_POST['kirim'])) {
   $insert = "INSERT INTO tb_pertanyaan(pertanyaan) VALUES('$kirimPertanyaan')";
 
   $run_insert = mysqli_query($con, $insert);
+  
+  header("Location: index.php");
+  die();
+
 }
 
 
 //Kirim Jawaban
 //Jawaban iya
 if (isset($_GET['jwb_iya'])) {
-  $jwb_id = $_GET['jwb_iya'];
-  $edit_id = $_GET['jwbbenar'];
+  $edit_id = $_GET['jwb_iya'];
 
   $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
   $run = mysqli_query($con, $select);
@@ -63,9 +66,8 @@ if (isset($_GET['jwb_iya'])) {
 }
 
 //Jawaban Tidak
-if (isset($_GET['jwbsalah'])) {
-
-  $edit_id = $_GET['jwbsalah'];
+if (isset($_GET['jwb_tidak'])) {
+  $edit_id = $_GET['jwb_tidak'];
 
   $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
   $run = mysqli_query($con, $select);

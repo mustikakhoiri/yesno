@@ -1,6 +1,6 @@
 <?php
 
-include('config_index.php');
+include('config.php');
 
 session_start();
 if(!isset($_SESSION["username_user"])) header("Location: login.php");
@@ -252,7 +252,8 @@ if(!isset($_SESSION["username_user"])) header("Location: login.php");
                 while ($row_pertanyaan = mysqli_fetch_array($run)) {;
                   $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
                   $pertanyaan = $row_pertanyaan['pertanyaan'];
-                  $jumlahJawaban = $row_pertanyaan['jwb_iya'];
+                  $jwb_iya = $row_pertanyaan['jwb_iya'];
+                  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
 
                 ?>
 
@@ -264,17 +265,15 @@ if(!isset($_SESSION["username_user"])) header("Location: login.php");
                           <?php echo $pertanyaan; ?>
                         </p>
 
-                        <span class="text-muted">Total Jawaban <?php echo $jumlahJawaban; ?></span>
-
                         <div class="blog-comments__actions">
                           <div class="btn-group btn-group-sm">
-                            <a type="button" class="btn btn-white" href="?jwb=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                            <a type="button" class="btn btn-white" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
                               <span class="text-success">
                                 <i class="material-icons">check</i>
                               </span>
                               Benar
                             </a>
-                            <a type="button" class="btn btn-white" href="?jwb=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                            <a type="button" class="btn btn-white" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
                               <span class="text-danger">
                                 <i class="material-icons">clear</i>
                               </span>
@@ -282,6 +281,9 @@ if(!isset($_SESSION["username_user"])) header("Location: login.php");
                             </a>
                           </div>
                         </div>
+
+                        <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span>
                       </div>
                     </div>
                   </div>
