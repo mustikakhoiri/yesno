@@ -31,19 +31,8 @@ if (isset($_POST['kirim'])) {
   $insert = "INSERT INTO tb_pertanyaan(pertanyaan) VALUES('$kirimPertanyaan')";
 
   $run_insert = mysqli_query($con, $insert);
-}
 
-//Kirim Pertanyaan
-if (isset($_POST['kirim'])) {
-  $kirimPertanyaan = $_POST['pertanyaan'];
-
-  $insert = "INSERT INTO tb_pertanyaan(pertanyaan) VALUES('$kirimPertanyaan')";
-
-  $run_insert = mysqli_query($con, $insert);
-  
-  header("Location: index.php");
-  die();
-
+  header("Refresh:0");
 }
 
 
