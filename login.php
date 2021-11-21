@@ -34,6 +34,7 @@
             $_SESSION['username_user'] = $row['username_user'];
             header("Location: dashboard.php");
         } else {
+            // $this->session->set_flashdata('error_msg', 'Username atau password Anda salah. Silahkan coba lagi!');
             echo "<script>alert('Username atau password Anda salah. Silahkan coba lagi!')</script>";
         }
     }
@@ -59,10 +60,10 @@
                                     <span><i class="icon icon-user"></i></span>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required>
+                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required title="Username tidak boleh kosong">
                                     <label for="username_user">Username</label>
                                 </div>
-                                <div class="form-label-group"><input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required>
+                                <div class="form-label-group"><input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required title="Password harus diisi">
                                     <label for="password_user">Kata Sandi</label>
                                 </div>
                                 <div class="form-label-group">

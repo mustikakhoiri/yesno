@@ -30,7 +30,7 @@
         $cpassword = md5($_POST['cpassword']);
 
         if ($password == $cpassword) {
-            $sql = "SELECT * FROM tb_user WHERE username_user ='$username'";
+            $sql = "SELECT * FROM tb_user WHERE username_user ='$username' OR email_user='$email'";
             $result = mysqli_query($con, $sql);
             if (!$result->num_rows > 0) {
                 $sql = "INSERT INTO tb_user (nama_user, username_user, email_user, password_user)
@@ -43,11 +43,13 @@
                     $email = "";
                     $_POST['password_user'] = "";
                     $_POST['cpassword'] = "";
+
+                    header('location:login.php');
                 } else {
                     echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
                 }
             } else {
-                echo "<script>alert('Woops! Email Sudah Terdaftar.')</script>";
+                echo "<script>alert('Woops! Email dan Username Sudah Terdaftar.')</script>";
             }
         } else {
             echo "<script>alert('Password Tidak Sesuai')</script>";
@@ -72,24 +74,28 @@
                                     <span><i class="icon icon-user"></i></span>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="text" id="nama_user" name="nama_user" class="form-control" placeholder="Masukkan Nama Lengkap" autofocus required>
+                                    <input type="text" id="nama_user" name="nama_user" class="form-control" placeholder="Masukkan Nama Lengkap" autofocus required pattern="[a-zA-Z]{1,}" title="Nama harus berupa huruf"> 
                                     <label for="nama_user">Nama Lengkap</label>
+                                    <small class="form-text text-muted">* Nama harus berupa Huruf.</small>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required>
+                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required pattern=".[a-zA-Z]+[0-9]{1,}" title="Username harus berupa angka dan huruf"> 
                                     <label for="username_user">Username</label>
+                                    <small class="form-text text-muted">* Username harus berupa kombinasi dari Angka dan Huruf.</small>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="email" id="email_user" name="email_user" class="form-control" placeholder="Masukkan Email" autofocus required>
+                                    <input type="email" id="email_user" name="email_user" class="form-control" placeholder="Masukkan Email" autofocus required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" title="Perhatikan penulisan email, ex. dyta67@ymail.com">
                                     <label for="email_user">Email</label>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required>
+                                    <input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required minlength="6">
                                     <label for="password_user">Kata Sandi</label>
+                                    <small class="form-text text-muted">* Kata Sandi minimal terdiri dari 6 karakter.</small>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="password" id="cpassword" name="cpassword" class="form-control" placeholder="Masukkan Ulang Kata Sandi" autofocus required>
+                                    <input type="password" id="cpassword" name="cpassword" class="form-control" placeholder="Masukkan Ulang Kata Sandi" autofocus required minlength="6">
                                     <label for="cpassword">Ulang Kata Sandi</label>
+                                    <small class="form-text text-muted">* Kata Sandi minimal terdiri dari 6 karakter.</small>
                                 </div>
                                 <div class="form-label-group">
                                     <button type="submit" name="submit-register" class="btn btn-lg btn-primary btn-block text-uppercase">Buat Akun</button>
@@ -109,6 +115,7 @@
     </main>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
 </body>
 
 </html>
