@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
                     <div>
-                        <h1>True or False Question</h1>
+                        <h1>True or False Questions</h1>
                         <h2>Jawab berbagai jenis pertanyaan hanya dengan 1 kali klik dan temukan fakta menarik di baliknya! <br><br>Belum Punya Akun?</h2>
                         <a href="register.php" class="download-btn">DAFTAR SEKARANG</a>
                     </div>

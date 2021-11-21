@@ -45,8 +45,8 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
               ">
             <a class="navbar-brand w-100 mr-0" href="dashboard.php" style="line-height: 25px">
               <div class="d-table m-auto">
-                <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard" />
-                <span class="d-none d-md-inline ml-1">Shards Dashboard</span>
+                <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px" src="images/shards-dashboards-logo.svg" alt="True or False" />
+                <span class="d-none d-md-inline ml-1">True or False</span>
               </div>
             </a>
             <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
@@ -102,7 +102,7 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="user-profile-lite.html">
+              <a class="nav-link" href="profile.php">
                 <i class="material-icons">person</i>
                 <span>User Profile</span>
               </a>
@@ -137,7 +137,7 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
                 <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search" />
               </div>
             </form>
-            <ul class="navbar-nav border-left flex-row">
+            <ul class="navbar-nav border-left flex-row ">
               <li class="nav-item border-right dropdown notifications">
                 <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="nav-link-icon__wrapper">
@@ -154,10 +154,8 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
                     </div>
                     <div class="notification__content">
                       <span class="notification__category">Analytics</span>
-                      <p>
-                        Your website’s active users count increased by
-                        <span class="text-success text-semibold">28%</span> in
-                        the last week. Great job!
+                      <p>Your website’s active users count increased by
+                        <span class="text-success text-semibold">28%</span> in the last week. Great job!
                       </p>
                     </div>
                   </a>
@@ -169,25 +167,30 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
                     </div>
                     <div class="notification__content">
                       <span class="notification__category">Sales</span>
-                      <p>
-                        Last week your store’s sales count decreased by
-                        <span class="text-danger text-semibold">5.52%</span>.
-                        It could have been worse!
+                      <p>Last week your store’s sales count decreased by
+                        <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
                       </p>
                     </div>
                   </a>
-                  <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="user-profile-lite.html">
-                      <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="components-blog-posts.html">
-                      <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="add-new-post.html">
-                      <i class="material-icons">note_add</i> Add New Post</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="logout.php">
-                      <i class="material-icons text-danger">&#xE879;</i> Logout
-                    </a>
-                  </div>
+                  <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
+                  <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small">
+                  <a class="dropdown-item" href="profile.php">
+                    <i class="material-icons">&#xE7FD;</i> Profile</a>
+                  <a class="dropdown-item" href="components-blog-posts.html">
+                    <i class="material-icons">vertical_split</i> Blog Posts</a>
+                  <a class="dropdown-item" href="add-new-post.html">
+                    <i class="material-icons">note_add</i> Add New Post</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-danger" href="logout.php">
+                    <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                </div>
               </li>
             </ul>
             <nav class="nav">
@@ -210,7 +213,7 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
           <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
               <span class="text-uppercase page-subtitle">Dashboard</span>
-              <h3 class="page-title">TRUE FALSE</h3>
+              <h3 class="page-title">TRUE OR FALSE</h3>
             </div>
           </div>
           <!-- End Page Header -->
@@ -227,7 +230,7 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
                   <div class="form-group">
                     <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   </div>
-                  <input type="submit" class="btn btn-accent" name="kirim"> </input>
+                  <button type="submit" class="btn btn-accent" name="kirim">Ajukan Pertanyaan</button>
                 </form>
               </div>
             </div>
@@ -387,6 +390,24 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
           </span>
         </footer>
       </main>
+    </div>
+  </div>
+  <div class="promo-popup animated">
+    <a href="dashboard.php" class="pp-cta extra-action">
+      <img width="150px" src="images/instruktur.svg"> </a>
+    <div class="pp-intro-bar"> Ingin tahu fakta menarik?
+      <span class="close">
+        <i class="material-icons">close</i>
+      </span>
+      <span class="up">
+        <i class="material-icons">keyboard_arrow_up</i>
+      </span>
+    </div>
+    <div class="pp-inner-content">
+      <h2>True or False</h2>
+      <p>Ajukan pertanyaan untuk mendapatkan jawaban fakta di baliknya!
+        <br> Atau jawab pertanyaan hanya dengan 1 kali klik!
+      </p>
     </div>
   </div>
 
