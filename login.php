@@ -70,6 +70,9 @@
                                     <button type="submit" name="submit-login" class="btn btn-lg btn-primary btn-block text-uppercase">Masuk</button>
                                 </div>
                                 <div class="text-center">
+                                    <p><a href="lupapass.php">Lupa Kata Sandi?</a></p>
+                                </div>
+                                <div class="text-center">
                                     <p>Belum punya akun? <a href="register.php">Daftar</a></p>
                                 </div>
                             </form>

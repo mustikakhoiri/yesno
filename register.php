@@ -37,14 +37,21 @@
                         VALUES ('$name', '$username', '$email', '$password')";
                 $result = mysqli_query($con, $sql);
                 if ($result) {
-                    echo "<script>alert('Selamat, registrasi berhasil!')</script>";
                     $name = "";
                     $username = "";
                     $email = "";
                     $_POST['password_user'] = "";
                     $_POST['cpassword'] = "";
+                    
+                    echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                        <i class="fa fa-check mx-2"></i>
+                        <strong>Sukses!</strong> Registrasi Berhasil! </div>
+                    <div class="main-content-container container-fluid px-4">';
 
-                    header('location:login.php');
+                    //header('location:login.php');
                 } else {
                     echo "<script>alert('Woops! Terjadi kesalahan.')</script>";
                 }
@@ -79,9 +86,9 @@
                                     <small class="form-text text-muted">* Nama harus berupa Huruf.</small>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required pattern=".[a-zA-Z]+[0-9]{1,}" title="Username harus berupa angka dan huruf"> 
+                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required pattern=".[a-zA-Z]+[0-9]{1,}" title="Username harus berupa huruf dan angka, ex. dyta1234"> 
                                     <label for="username_user">Username</label>
-                                    <small class="form-text text-muted">* Username harus berupa kombinasi dari Angka dan Huruf.</small>
+                                    <small class="form-text text-muted">* Username harus berupa kombinasi dari Huruf dan Huruf.</small>
                                 </div>
                                 <div class="form-label-group">
                                     <input type="email" id="email_user" name="email_user" class="form-control" placeholder="Masukkan Email" autofocus required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" title="Perhatikan penulisan email, ex. dyta67@ymail.com">
@@ -115,7 +122,7 @@
     </main>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-
+    
 </body>
 
 </html>
