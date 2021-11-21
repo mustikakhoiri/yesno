@@ -30,11 +30,16 @@
         $query = "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'";
         $result = mysqli_query($con, $query);
         if ($result->num_rows > 0) {
+            // $hash = mysqli_fetch_assoc($result)['password_user'];
+            // if(password_verify($password, $hash)){
+            //     $_SESSION['username_user'] = $username;
+
+            //     header("Location: dashboard.php");
+            
             $row = mysqli_fetch_assoc($result);
             $_SESSION['username_user'] = $row['username_user'];
             header("Location: dashboard.php");
         } else {
-            // $this->session->set_flashdata('error_msg', 'Username atau password Anda salah. Silahkan coba lagi!');
             echo "<script>alert('Username atau password Anda salah. Silahkan coba lagi!')</script>";
         }
     }
@@ -73,9 +78,6 @@
                                 </div>
                                 <div class="form-label-group">
                                     <button type="submit" name="submit-login" class="btn btn-lg btn-primary btn-block text-uppercase">Masuk</button>
-                                </div>
-                                <div class="text-center">
-                                    <p><a href="lupapass.php">Lupa Kata Sandi?</a></p>
                                 </div>
                                 <div class="text-center">
                                     <p>Belum punya akun? <a href="register.php">Daftar</a></p>

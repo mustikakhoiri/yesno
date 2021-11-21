@@ -9,6 +9,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+        .alert{
+            padding: 20px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,14 +49,19 @@
                     $email = "";
                     $_POST['password_user'] = "";
                     $_POST['cpassword'] = "";
-                    
-                    echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                        </button>
-                        <i class="fa fa-check mx-2"></i>
-                        <strong>Sukses!</strong> Registrasi Berhasil! </div>
-                    <div class="main-content-container container-fluid px-4">';
+
+                    echo '<div class="alert alert-success" role="alert">
+                             <strong>Sukses!</strong> Registrasi Berhasil
+                    </div>';
+
+                                        
+                    // echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                    //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    //     <span aria-hidden="true">×</span>
+                    //     </button>
+                    //     <i class="fa fa-check mx-2"></i>
+                    //     <strong>Sukses!</strong> Registrasi Berhasil! </div>
+                    // <div class="main-content-container container-fluid px-4">';
 
                     //header('location:login.php');
                 } else {
@@ -73,6 +85,7 @@
                         <a class="navbar-brand" href="index.php">
                             <img src="images/instruktur.svg" width="100" alt="logo"></a>
                     </div>
+                    
                     <div class="card row card-signin flex-row px-3">
                         <div class="card-body col-md-6">
                             <h5 class="card-title text-center">Daftar Akun</h5>
@@ -88,7 +101,7 @@
                                 <div class="form-label-group">
                                     <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required pattern=".[a-zA-Z]+[0-9]{1,}" title="Username harus berupa huruf dan angka, ex. dyta1234"> 
                                     <label for="username_user">Username</label>
-                                    <small class="form-text text-muted">* Username harus berupa kombinasi dari Huruf dan Huruf.</small>
+                                    <small class="form-text text-muted">* Username harus berupa kombinasi dari Huruf dan Angka.</small>
                                 </div>
                                 <div class="form-label-group">
                                     <input type="email" id="email_user" name="email_user" class="form-control" placeholder="Masukkan Email" autofocus required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" title="Perhatikan penulisan email, ex. dyta67@ymail.com">
@@ -120,6 +133,13 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove(); 
+            });
+        }, 3000);
+    </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     
