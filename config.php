@@ -20,7 +20,7 @@ $db = "truefalse";
 $con = mysqli_connect($host, $username, $password, $db) or die();
 
 //Menampilkan Pertanyaan
-$select = "SELECT * FROM tb_pertanyaan";
+$select = "SELECT * FROM tb_pertanyaan ORDER BY id_pertanyaan DESC";
 $run = mysqli_query($con, $select);
 
 
