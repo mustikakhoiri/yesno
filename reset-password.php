@@ -24,7 +24,7 @@
                     <div class="card row card-signin flex-row px-5">
                         <div class="card-body col-md-12 px-5">
                             <h5 class="card-title text-center">Reset Kata Sandi</h5>
-                            <form class="form-signin" action="forgot-password.php" method="POST">
+                            <form class="form-signin" action="reset-password.php" method="POST">
                                 <div class="form-icon">
                                     <span><i class="icon icon-user"></i></span>
                                 </div>

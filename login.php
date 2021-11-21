@@ -67,7 +67,7 @@
                                     <label for="password_user">Kata Sandi</label>
                                 </div>
                                 <div class="text-right">
-                                    <a href="forgot-password.php">
+                                    <a href="reset-password.php">
                                         <p>Lupa Kata Sandi?</p>
                                     </a>
                                 </div>
