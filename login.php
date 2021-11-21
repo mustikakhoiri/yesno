@@ -66,6 +66,11 @@
                                 <div class="form-label-group"><input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required title="Password harus diisi">
                                     <label for="password_user">Kata Sandi</label>
                                 </div>
+                                <div class="text-right">
+                                    <a href="forgot-password.php">
+                                        <p>Lupa Kata Sandi?</p>
+                                    </a>
+                                </div>
                                 <div class="form-label-group">
                                     <button type="submit" name="submit-login" class="btn btn-lg btn-primary btn-block text-uppercase">Masuk</button>
                                 </div>
