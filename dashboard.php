@@ -235,62 +235,127 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
           </div>
           <!-- End New Draft Component -->
 
-          <!-- Discussions Component -->
-          <div class="col mb-4">
-            <div class="card card-small blog-comments">
-              <div class="card-header border-bottom">
-                <h6 class="m-0">Pertanyaan tersedia</h6>
-              </div>
+          <div class="row">
+            <!-- Discussions Component -->
+            <div class="col mb-4">
+              <div class="card card-small blog-comments">
+                <div class="card-header border-bottom">
+                  <h6 class="m-0">Pertanyaan Tersedia</h6>
+                </div>
 
-              <?php
+                <?php
 
-              while ($row_pertanyaan = mysqli_fetch_array($run)) {;
-                $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
-                $pertanyaan = $row_pertanyaan['pertanyaan'];
-                $jwb_iya = $row_pertanyaan['jwb_iya'];
-                $jwb_tidak = $row_pertanyaan['jwb_tidak'];
+                while ($row_pertanyaan = mysqli_fetch_array($run)) {;
+                  $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
+                  $pertanyaan = $row_pertanyaan['pertanyaan'];
+                  $jwb_iya = $row_pertanyaan['jwb_iya'];
+                  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
 
-              ?>
+                ?>
 
-                <div class="card-body p-0">
-                  <div class="blog-comments__item d-flex p-3">
-                    <div class="blog-comments__content">
+                  <div class="card-body p-0">
+                    <div class="blog-comments__item d-flex p-3">
+                      <div class="blog-comments__content">
 
-                      <p class="m-0 my-1 mb-2">
-                        <?php echo $pertanyaan; ?>
-                      </p>
+                        <p class="m-0 my-1 mb-2">
+                          <?php echo $pertanyaan; ?>
+                        </p>
 
-                      <div class="blog-comments__actions">
-                        <div class="btn-group btn-group-sm">
-                          <a type="button" class="btn btn-white" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
-                            <span class="text-success">
-                              <i class="material-icons">check</i>
-                            </span>
-                            Benar
-                          </a>
-                          <a type="button" class="btn btn-white" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
-                            <span class="text-danger">
-                              <i class="material-icons">clear</i>
-                            </span>
-                            Salah
-                          </a>
+                        <div class="blog-comments__actions">
+                          <div class="btn-group btn-group-sm">
+                            <a type="button" class="btn btn-white" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                              <span class="text-success">
+                                <i class="material-icons">check</i>
+                              </span>
+                              Benar
+                            </a>
+                            <a type="button" class="btn btn-white" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                              <span class="text-danger">
+                                <i class="material-icons">clear</i>
+                              </span>
+                              Salah
+                            </a>
+                          </div>
                         </div>
-                      </div>
 
-                      <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
-                      <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span>
+                        <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span>
+                      </div>
+                    </div>
+                  </div>
+
+                <?php } ?>
+
+                <div class="card-footer border-top">
+                  <div class="row">
+                    <div class="col text-center view-report">
+                      <button type="submit" class="btn btn-white">
+                        Lihat semua pertanyaan
+                      </button>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <!-- End Discussions Component -->
 
-              <?php } ?>
+            <!-- Discussions Component -->
+            <div class="col mb-4">
+              <div class="card card-small blog-comments">
+                <div class="card-header border-bottom">
+                  <h6 class="m-0">Pertanyaan Kadaluarsa</h6>
+                </div>
 
-              <div class="card-footer border-top">
-                <div class="row">
-                  <div class="col text-center view-report">
-                    <button type="submit" class="btn btn-white">
-                      View All Comments
-                    </button>
+                <?php
+
+                while ($row_pertanyaanK = mysqli_fetch_array($runK)) {;
+                  $id_pertanyaanK = $row_pertanyaanK['id_pertanyaan'];
+                  $pertanyaanK = $row_pertanyaanK['pertanyaan'];
+                  $jwb_iyaK = $row_pertanyaanK['jwb_iya'];
+                  $jwb_tidakK = $row_pertanyaanK['jwb_tidak'];
+
+                ?>
+
+                  <div class="card-body p-0">
+                    <div class="blog-comments__item d-flex p-3">
+                      <div class="blog-comments__content">
+
+                        <p class="m-0 my-1 mb-2">
+                          <?php echo $pertanyaanK; ?>
+                        </p>
+
+                        <div class="blog-comments__actions">
+                          <div class="btn-group btn-group-sm">
+                            <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                              <span class="text-success">
+                                <i class="material-icons">check</i>
+                              </span>
+                              Benar
+                            </a>
+                            <a type="button" class="btn btn-white disabled" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                              <span class="text-danger">
+                                <i class="material-icons">clear</i>
+                              </span>
+                              Salah
+                            </a>
+                          </div>
+                        </div>
+
+                        <span class="text-muted"><?php echo $jwb_iyaK; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidakK; ?> orang menjawab salah</span>
+                      </div>
+                    </div>
+                  </div>
+
+                <?php } ?>
+
+                <div class="card-footer border-top">
+                  <div class="row">
+                    <div class="col text-center view-report">
+                      <button type="submit" class="btn btn-white">
+                        Lihat semua pertanyaan
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

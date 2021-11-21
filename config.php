@@ -19,9 +19,13 @@ $db = "truefalse";
 
 $con = mysqli_connect($host, $username, $password, $db) or die();
 
-//Menampilkan Pertanyaan
-$select = "SELECT * FROM tb_pertanyaan ORDER BY id_pertanyaan DESC";
+//Menampilkan Pertanyaan Tersedia
+$select = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'TRUE' ORDER BY id_pertanyaan DESC";
 $run = mysqli_query($con, $select);
+
+//Menampilkan Pertanyaan Kadaluarsa
+$selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_pertanyaan DESC";
+$runK = mysqli_query($con, $selectK);
 
 
 //Kirim Pertanyaan
