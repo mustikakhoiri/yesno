@@ -136,7 +136,7 @@ $usr    = mysqli_fetch_array($tampilUser);
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="errors.php">
+              <a class="nav-link active" href="errors.php">
                 <i class="material-icons">error</i>
                 <span>Errors</span>
               </a>
@@ -219,103 +219,34 @@ $usr    = mysqli_fetch_array($tampilUser);
           </nav>
         </div>
         <!-- / .main-navbar -->
-        <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-          <i class="fa fa-check mx-2"></i>
-          <strong>Success!</strong> Your profile has been updated!
-        </div>
-        <div class="main-content-container container-fluid px-5">
-          <!-- Page Header -->
-          <div class="page-header row no-gutters py-4">
-            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-              <span class="text-uppercase page-subtitle">Overview</span>
-              <h3 class="page-title">Profil Pengguna</h3>
-            </div>
+        <div class="error">
+          <div class="error__content">
+            <h2>500</h2>
+            <h3>Something went wrong!</h3>
+            <p>There was a problem on our end. Please try again later.</p>
+            <button type="button" class="btn btn-accent btn-pill">&larr; Go Back</button>
           </div>
-          <!-- End Page Header -->
-          <!-- Default Light Table -->
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card card-small mb-4 pt-3">
-                <div class="card-header border-bottom text-center">
-                  <div class="mb-3 mx-auto">
-                    <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110">
-                  </div>
-                  <h4 class="mb-0"><?= $usr['nama_user'] ?></h4>
-                  <span class="text-muted d-block mb-2"><?= $usr['username_user'] ?></span>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item p-4">
-                    <strong class="d-block mb-2">Alamat Email:</strong>
-                    <span><?= $usr['email_user'] ?></span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="card card-small mb-4">
-                <div class="card-header border-bottom">
-                  <h6 class="m-0">Ubah Kata Sandi</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item p-3">
-                    <div class="row">
-                      <div class="col">
-                        <form action="profile.php" method="POST">
-                          <div class="form-row">
-                            <div class="form-group col-md-12">
-                              <label for="current-password">Kata Sandi Sebelumnya</label>
-                              <input type="password" class="form-control" id="current-password" placeholder="Kata Sandi Sebelumnya">
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-12">
-                              <label for="new-password">Kata Sandi Baru</label>
-                              <input type="password" class="form-control" id="new-password" placeholder="Kata Sandi Baru">
-                            </div>
-                          </div>
-                          <div class="form-row">
-                            <div class="form-group col-md-12">
-                              <label for="confirm-new-password">Konfirmasi Kata Sandi Baru</label>
-                              <input type="password" class="form-control" id="confirm-new-password" placeholder="Konfirmasi Kata Sandi Baru">
-                            </div>
-                          </div>
-                          <button type="submit" class="btn btn-accent">Ubah Kata Sandi</button>
-                        </form>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- End Default Light Table -->
+          <!-- / .error_content -->
         </div>
-        <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Blog</a>
-            </li>
-          </ul>
-          <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-            <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
-          </span>
-        </footer>
+        <!-- / .error -->
       </main>
+    </div>
+  </div>
+  <div class="promo-popup animated">
+    <a href="http://bit.ly/shards-dashboard-pro" class="pp-cta extra-action">
+      <img src="https://dgc2qnsehk7ta.cloudfront.net/uploads/sd-blog-promo-2.jpg"> </a>
+    <div class="pp-intro-bar"> Need More Templates?
+      <span class="close">
+        <i class="material-icons">close</i>
+      </span>
+      <span class="up">
+        <i class="material-icons">keyboard_arrow_up</i>
+      </span>
+    </div>
+    <div class="pp-inner-content">
+      <h2>Shards Dashboard Pro</h2>
+      <p>A premium & modern Bootstrap 4 admin dashboard template pack.</p>
+      <a class="pp-cta extra-action" href="http://bit.ly/shards-dashboard-pro">Download</a>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

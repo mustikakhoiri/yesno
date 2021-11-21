@@ -5,6 +5,9 @@ include('config.php');
 session_start();
 if (!isset($_SESSION["username_user"])) header("Location: login.php");
 
+$tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
+$usr    = mysqli_fetch_array($tampilUser);
+
 ?>
 
 
@@ -78,31 +81,31 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="components-blog-posts.html">
+              <a class="nav-link" href="components-blog-posts.php">
                 <i class="material-icons">vertical_split</i>
                 <span>Blog Posts</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="add-new-post.html">
+              <a class="nav-link" href="add-new-post.php">
                 <i class="material-icons">note_add</i>
                 <span>Add New Post</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="form-components.html">
+              <a class="nav-link" href="form-components.php">
                 <i class="material-icons">view_module</i>
                 <span>Forms &amp; Components</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tables.html">
+              <a class="nav-link" href="tables.php">
                 <i class="material-icons">table_chart</i>
                 <span>Tables</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="errors.html">
+              <a class="nav-link" href="errors.php">
                 <i class="material-icons">error</i>
                 <span>Errors</span>
               </a>
@@ -172,7 +175,7 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
-                  <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                  <span class="d-none d-md-inline-block"><?= $usr['nama_user'] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                   <a class="dropdown-item" href="profile.php">
