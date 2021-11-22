@@ -65,7 +65,7 @@ $aidi_user = $usr['id_user'];
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="user-profile-lite.html">
+              <a class="nav-link active" href="user_profile.php">
                 <i class="material-icons">person</i>
                 <span>User Profile</span>
               </a>
@@ -159,10 +159,10 @@ $aidi_user = $usr['id_user'];
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
-                  <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                  <span class="d-none d-md-inline-block"><?= $usr['nama_user']?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                  <a class="dropdown-item" href="user-profile-lite.html">
+                  <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profile</a>
                   <a class="dropdown-item" href="components-blog-posts.html">
                     <i class="material-icons">vertical_split</i> Blog Posts</a>
@@ -203,22 +203,23 @@ $aidi_user = $usr['id_user'];
                   <li class="list-group-item p-3">
                     <div class="row">
                       <div class="col">
-                        <form>
+                        <form method="POST">
                           <div class="form-row">
+                            <input type="hidden" value="<?= $aidi_user?>" name="id_user">
                             <div class="form-group col-md-6">
                               <label for="feFirstName">Nama</label>
-                              <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="<?= $usr['nama_user']?>">
+                              <input type="text" class="form-control" placeholder="First Name" value="<?= $usr['nama_user']?>" name="nama_user">
                             </div>
                             <div class="form-group col-md-6">
                               <label for="feLastName">Username</label>
-                              <input type="text" class="form-control disabled" id="feLastName" placeholder="Last Name" value="<?= $usr['username_user']?>">
+                              <input type="text" class="form-control" placeholder="Last Name" value="<?= $usr['username_user']?>" disabled>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="feEmailAddress">Email</label>
-                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user']?>">
+                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user']?>" name="email_user">
                           </div>
-                          <button type="submit" class="btn btn-accent">Update Account</button>
+                          <button type="submit" class="btn btn-accent" name="kirimUpdate">Update data akun</button>
                         </form>
                       </div>
                     </div>
@@ -235,7 +236,7 @@ $aidi_user = $usr['id_user'];
                   <li class="list-group-item p-3">
                     <div class="row">
                       <div class="col">
-                        <form action="update_profile.php" method="POST">
+                        <form action="edit_profile.php" method="POST">
                           <div class="form-row">
                             <div class="form-group col-md-12">
                               <label for="current_password">Kata Sandi Sebelumnya</label>

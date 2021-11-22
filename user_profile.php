@@ -65,7 +65,7 @@ $aidi_user = $usr['id_user'];
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="user-profile-lite.html">
+              <a class="nav-link active" href="user_profile.php">
                 <i class="material-icons">person</i>
                 <span>User Profile</span>
               </a>
@@ -162,7 +162,7 @@ $aidi_user = $usr['id_user'];
                   <span class="d-none d-md-inline-block"><?= $usr['nama_user']?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                  <a class="dropdown-item" href="user-profile-lite.html">
+                  <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profile</a>
                   <a class="dropdown-item" href="components-blog-posts.html">
                     <i class="material-icons">vertical_split</i> Blog Posts</a>
@@ -227,10 +227,11 @@ $aidi_user = $usr['id_user'];
                   <table class="table mb-0">
                     <thead class="bg-light">
                       <tr>
-                        <th scope="col" class="border-0 align-top">Pertanyaan</th>
-                        <th scope="col" class="border-0">Jawab Benar</th>
-                        <th scope="col" class="border-0">Jawab Salah</th>
-                        <th scope="col" class="border-0"></th>
+                        <th scope="col" class="border-0 align-middle">Pertanyaan</th>
+                        <th scope="col" class="border-0 align-middle">kategori</th>
+                        <th scope="col" class="border-0 align-middle text-center">Jawab Benar</th>
+                        <th scope="col" class="border-0 align-middle text-center">Jawab Salah</th>
+                        <th scope="col" class="border-0 align-middle text-center"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -244,6 +245,7 @@ $aidi_user = $usr['id_user'];
                       while ($row_pertanyaan = mysqli_fetch_array($runS)) {;
                         $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
                         $pertanyaan = $row_pertanyaan['pertanyaan'];
+                        $kategori = $row_pertanyaan['nama_kategori'];
                         $jwb_iya = $row_pertanyaan['jwb_iya'];
                         $jwb_tidak = $row_pertanyaan['jwb_tidak'];
 
@@ -251,6 +253,7 @@ $aidi_user = $usr['id_user'];
 
                         <tr>
                           <td><?php echo $pertanyaan; ?></td>
+                          <td class="text-center align-middle"><?php echo $kategori; ?></td>
                           <td class="text-center align-middle"><?php echo $jwb_iya; ?></td>
                           <td class="text-center align-middle"><?php echo $jwb_tidak; ?></td>
                           <td class="nav-item dropdown">
