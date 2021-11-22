@@ -1,16 +1,3 @@
-<?php
-
-include('config.php');
-
-session_start();
-if (!isset($_SESSION["username_user"])) header("Location: login.php");
-
-$tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
-$usr    = mysqli_fetch_array($tampilUser);
-
-?>
-
-
 <!DOCTYPE html>
 <html class="no-js h-100" lang="en">
 
@@ -31,6 +18,19 @@ $usr    = mysqli_fetch_array($tampilUser);
 </head>
 
 <body class="h-100">
+
+  <?php
+
+  include('config.php');
+
+  session_start();
+  if (!isset($_SESSION["username_user"])) header("Location: login.php");
+
+  $tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
+  $usr    = mysqli_fetch_array($tampilUser);
+
+  ?>
+
   <div class="container-fluid">
     <div class="row">
 
@@ -212,23 +212,36 @@ $usr    = mysqli_fetch_array($tampilUser);
           <!-- End Page Header -->
 
           <!-- New Draft Component -->
-          <div class="col mb-4">
-            <!-- Quick Post -->
-            <div class="card card-small h-100">
-              <div class="card-header border-bottom">
-                <h6 class="m-0">Pertanyaan Baru</h6>
-              </div>
-              <div class="card-body d-flex flex-column">
-                <form class="quick-post-form" method="post">
-                  <div class="form-group">
-                    <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-accent" name="kirim">Ajukan Pertanyaan</button>
-                </form>
-              </div>
+          <!-- <div class="col mb-4"> -->
+          <!-- Quick Post -->
+          <div class="card card-small h-100 mb-4">
+            <div class="card-header border-bottom">
+              <h4 class="m-0">Pertanyaan Baru</h4>
             </div>
-            <!-- End Quick Post -->
+            <div class="card-body d-flex flex-column">
+              <form class="quick-post-form" method="post">
+                <div class="form-group">
+                  <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
+                  <label for="nama_kategori">Kategori</label>
+                  <select name="nama_kategori" id="nama_kategori" class="form-control" data-placeholder="Pilih kategori" required>
+                    <option selected disabled>Pilih Kategori</option>
+                    <option value="Bisnis">Bisnis</option>
+                    <option value="Budaya">Budaya</option>
+                    <option value="Hiburan">Hiburan</option>
+                    <option value="Kuliner">Kuliner</option>
+                    <option value="Musik">Musik</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Politik">Politik</option>
+                    <option value="Religi">Religi</option>
+                    <option value="Sosial Ekonomi">Sosial Ekonomi</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-accent" name="kirim">Ajukan Pertanyaan</button>
+              </form>
+            </div>
           </div>
+          <!-- End Quick Post -->
+          <!-- </div> -->
           <!-- End New Draft Component -->
 
           <div class="row">
@@ -236,7 +249,7 @@ $usr    = mysqli_fetch_array($tampilUser);
             <div class="col mb-4">
               <div class="card card-small blog-comments">
                 <div class="card-header border-bottom">
-                  <h6 class="m-0">Pertanyaan Tersedia</h6>
+                  <h4 class="m-0">Pertanyaan Tersedia</h4>
                 </div>
 
                 <?php
@@ -299,7 +312,7 @@ $usr    = mysqli_fetch_array($tampilUser);
             <div class="col mb-4">
               <div class="card card-small blog-comments">
                 <div class="card-header border-bottom">
-                  <h6 class="m-0">Pertanyaan Kadaluarsa</h6>
+                  <h4 class="m-0">Pertanyaan Kadaluarsa</h4>
                 </div>
 
                 <?php
@@ -339,6 +352,66 @@ $usr    = mysqli_fetch_array($tampilUser);
 
                         <span class="text-muted"><?php echo $jwb_iyaK; ?> orang menjawab benar</span><br>
                         <span class="text-muted"><?php echo $jwb_tidakK; ?> orang menjawab salah</span>
+                      </div>
+                    </div>
+                  </div>
+
+                <?php } ?>
+
+                <div class="card-footer border-top">
+                  <div class="row">
+                    <div class="col text-center view-report">
+                      <button type="submit" class="btn btn-white">
+                        Lihat semua pertanyaan
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-small blog-comments mt-4">
+                <div class="card-header border-bottom">
+                  <h4 class="m-0">Pertanyaan Berdasarkan Kategori</h4>
+                </div>
+
+                <?php
+
+                while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
+                  $id_pertanyaanKtg = $row_pertanyaanKtg['id_pertanyaan'];
+                  $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
+                  $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
+                  $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak'];
+                  $nama_kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
+
+                ?>
+
+                  <div class="card-body p-0">
+                    <div class="blog-comments__item d-flex p-3">
+                      <div class="blog-comments__content">
+
+                        <h5>Kategori: <?= $nama_kategoriKtg; ?></h5>
+                        <p class="m-0 my-1 mb-2">
+                          <?php echo $pertanyaanKtg; ?>
+                        </p>
+
+                        <div class="blog-comments__actions">
+                          <div class="btn-group btn-group-sm">
+                            <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                              <span class="text-success">
+                                <i class="material-icons">check</i>
+                              </span>
+                              Benar
+                            </a>
+                            <a type="button" class="btn btn-white disabled" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                              <span class="text-danger">
+                                <i class="material-icons">clear</i>
+                              </span>
+                              Salah
+                            </a>
+                          </div>
+                        </div>
+
+                        <span class="text-muted"><?php echo $jwb_iyaKtg; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidakKtg; ?> orang menjawab salah</span>
                       </div>
                     </div>
                   </div>

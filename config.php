@@ -27,12 +27,17 @@ $run = mysqli_query($con, $select);
 $selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_pertanyaan DESC";
 $runK = mysqli_query($con, $selectK);
 
+//Menampilkan Pertanyaan Berdasarkan Kategori
+$selectKtg = "SELECT * FROM tb_pertanyaan WHERE nama_kategori = 'Bisnis' ORDER BY id_pertanyaan DESC";
+$runKtg = mysqli_query($con, $selectKtg);
+
 
 //Kirim Pertanyaan
 if (isset($_POST['kirim'])) {
   $kirimPertanyaan = $_POST['pertanyaan'];
+  $kirimKategori = $_POST['nama_kategori'];
 
-  $insert = "INSERT INTO tb_pertanyaan(pertanyaan) VALUES('$kirimPertanyaan')";
+  $insert = "INSERT INTO tb_pertanyaan(pertanyaan, nama_kategori) VALUES('$kirimPertanyaan', '$kirimKategori')";
 
   $run_insert = mysqli_query($con, $insert);
 
