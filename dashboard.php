@@ -77,7 +77,13 @@
             <li class="nav-item">
               <a class="nav-link active" href="dashboard.php">
                 <i class="material-icons">edit</i>
-                <span>Blog Dashboard</span>
+                <span>Beranda</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="user_profile.php">
+                <i class="material-icons">person</i>
+                <span>User Profile</span>
               </a>
             </li>
             <li class="nav-item">
@@ -178,7 +184,7 @@
                   <span class="d-none d-md-inline-block"><?= $usr['nama_user'] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                  <a class="dropdown-item" href="profile.php">
+                  <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profil</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-danger" href="logout.php">
@@ -221,6 +227,7 @@
             <div class="card-body d-flex flex-column">
               <form class="quick-post-form" method="post">
                 <div class="form-group">
+                  <input type="hidden" value="<?php echo $usr['id_user']?>" name="id_user">
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   <label for="nama_kategori">Kategori</label>
                   <select name="nama_kategori" id="nama_kategori" class="form-control" data-placeholder="Pilih kategori" required>

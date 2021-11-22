@@ -34,10 +34,11 @@ $runKtg = mysqli_query($con, $selectKtg);
 
 //Kirim Pertanyaan
 if (isset($_POST['kirim'])) {
+  $kirimId         = $_POST['id_user'];
   $kirimPertanyaan = $_POST['pertanyaan'];
-  $kirimKategori = $_POST['nama_kategori'];
+  $kirimKategori   = $_POST['nama_kategori'];
 
-  $insert = "INSERT INTO tb_pertanyaan(pertanyaan, nama_kategori) VALUES('$kirimPertanyaan', '$kirimKategori')";
+  $insert = "INSERT INTO tb_pertanyaan(id_user, pertanyaan, nama_kategori) VALUES('$kirimId', '$kirimPertanyaan', '$kirimKategori')";
 
   $run_insert = mysqli_query($con, $insert);
 
