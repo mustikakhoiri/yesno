@@ -12,8 +12,8 @@
     <style type="text/css">
         .alert{
             padding: 20px;
-            margin-left: 50px;
-            margin-right: 50px;
+            margin-left: 60px;
+            margin-right: 60px;
         }
     </style>
 </head>

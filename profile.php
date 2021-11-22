@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 include('config.php');
 
 session_start();
@@ -7,6 +7,52 @@ if (!isset($_SESSION["username_user"])) header("Location: login.php");
 
 $tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
 $usr    = mysqli_fetch_array($tampilUser);
+
+if ($_POST['submit']) {
+  //membuat variabel untuk menyimpan data inputan yang di isikan di form
+  $current_password      = $_POST['current_password'];
+  $new_password      = $_POST['new_password'];
+  $confirm_new_password  = $_POST['confirm_new_password'];
+
+  //cek dahulu ke database dengan query SELECT
+  //kondisi adalah WHERE (dimana) kolom password adalah $current_password di encrypt m5
+  //encrypt -> md5($current_password)
+  $current_password  = md5($current_password);
+  $cek       = $con->query("SELECT password_user FROM tb_user WHERE password_user='$current_password'");
+
+  if ($cek->num_rows) {
+    //kondisi ini jika password lama yang dimasukkan sama dengan yang ada di database
+    //membuat kondisi minimal password adalah 5 karakter
+    if (strlen($new_password) >= 6) {
+      //jika password baru sudah 6 atau lebih, maka lanjut ke bawah
+      //membuat kondisi jika password baru harus sama dengan konfirmasi password
+      if ($new_password == $confirm_new_password) {
+        //jika semua kondisi sudah benar, maka melakukan update kedatabase
+        //query UPDATE SET password = encrypt md5 new_password
+        //kondisi WHERE username = session username pada saat login, maka yang di ubah hanya user dengan username tersebut
+        $new_password   = md5($new_password);
+
+        $update     = $con->query("UPDATE tb_user SET password_user='$new_password' WHERE username_user='$username_user'");
+        if ($update) {
+          //kondisi jika proses query UPDATE berhasil
+          echo 'Password berhasil di ubah!';
+        } else {
+          //kondisi jika proses query gagal
+          echo 'Gagal merubah password!';
+        }
+      } else {
+        //kondisi jika password baru beda dengan konfirmasi password
+        echo 'Konfirmasi password tidak cocok!';
+      }
+    } else {
+      //kondisi jika password baru yang dimasukkan kurang dari 6 karakter
+      echo 'Minimal password baru adalah 6 karakter!';
+    }
+  } else {
+    //kondisi jika password lama tidak cocok dengan data yang ada di database
+    echo 'Password lama tidak cocok!';
+  }
+}
 
 ?>
 
@@ -266,20 +312,20 @@ $usr    = mysqli_fetch_array($tampilUser);
                         <form action="profile.php" method="POST">
                           <div class="form-row">
                             <div class="form-group col-md-12">
-                              <label for="current-password">Kata Sandi Sebelumnya</label>
-                              <input type="password" class="form-control" id="current-password" placeholder="Kata Sandi Sebelumnya">
+                              <label for="current_password">Kata Sandi Sebelumnya</label>
+                              <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Kata Sandi Sebelumnya">
                             </div>
                           </div>
                           <div class="form-row">
                             <div class="form-group col-md-12">
-                              <label for="new-password">Kata Sandi Baru</label>
-                              <input type="password" class="form-control" id="new-password" placeholder="Kata Sandi Baru">
+                              <label for="new_password">Kata Sandi Baru</label>
+                              <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Kata Sandi Baru">
                             </div>
                           </div>
                           <div class="form-row">
                             <div class="form-group col-md-12">
-                              <label for="confirm-new-password">Konfirmasi Kata Sandi Baru</label>
-                              <input type="password" class="form-control" id="confirm-new-password" placeholder="Konfirmasi Kata Sandi Baru">
+                              <label for="confirm_new_password">Konfirmasi Kata Sandi Baru</label>
+                              <input type="password" class="form-control" id="confirm_new_password" name="new_password" placeholder="Konfirmasi Kata Sandi Baru">
                             </div>
                           </div>
                           <button type="submit" class="btn btn-accent">Ubah Kata Sandi</button>
