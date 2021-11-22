@@ -203,7 +203,7 @@ $usr    = mysqli_fetch_array($tampilUser);
                   <span class="d-none d-md-inline-block"><?= $usr['nama_user'] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                  <a class="dropdown-item" href="profile.php">
+                  <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profil</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-danger" href="logout.php">
