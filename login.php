@@ -12,47 +12,20 @@
 </head>
 
 <body>
-
     <?php
-    require_once("config.php");
-    error_reporting(0);
-    session_start();
+    if(isset($_GET['pesan'])){
+		if($_GET['pesan'] == "gagal"){
+			echo '<script>alert("Login gagal! username dan password salah!")</script>';
+		}else if($_GET['pesan'] == "logout"){
+			echo "Anda telah berhasil logout";
+		}else if($_GET['pesan'] == "belum_login"){
+			echo "Anda harus login untuk mengakses halaman admin";
+		}
+	}
 
-
-    if (isset($_SESSION['username_user'])) {
-        header("Location:dashboard.php");
-    }
-
-    if (isset($_POST['submit-login'])) {
-        $username = $_POST['username_user'];
-        $password = md5($_POST['password_user']);
-
-        // $query = "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'";
-        // $result = mysqli_query($con, $query);
-        // if ($result->num_rows > 0) {
-
-            $data = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'");
-            $data_user = mysqli_fetch_assoc($data);
-            $username_user = $data_user['username_user'];
-
-            $row = mysqli_num_rows($data);
-
-            if($row > 0){
-                $_SESSION['username_user'] = $username_user;
-                $_SESSION['password_user'] = $password;
-
-
-                header("location:dashboard.php?pesan=loginberhasil");
-            }else{
-                // header("location:index.php?pesan=gagal");
-                echo "<script>alert('Username dan Password tidak sesuai')</script>";
-            }
-
-            
-    }
     ?>
-
-
+    
+    
     <main class="site-main mt-lg-3">
         <div class="container">
             <div class="row">
@@ -67,7 +40,7 @@
                         </div>
                         <div class="card-body col-md-6">
                             <h5 class="card-title text-center">Masuk Akun</h5>
-                            <form class="form-signin" action="login.php" method="POST">
+                            <form class="form-signin" action="cek_login.php" method="POST">
                                 <div class="form-icon">
                                     <span><i class="icon icon-user"></i></span>
                                 </div>
