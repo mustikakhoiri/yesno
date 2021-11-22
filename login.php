@@ -27,21 +27,28 @@
         $username = $_POST['username_user'];
         $password = md5($_POST['password_user']);
 
-        $query = "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'";
-        $result = mysqli_query($con, $query);
-        if ($result->num_rows > 0) {
-            // $hash = mysqli_fetch_assoc($result)['password_user'];
-            // if(password_verify($password, $hash)){
-            //     $_SESSION['username_user'] = $username;
+        // $query = "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'";
+        // $result = mysqli_query($con, $query);
+        // if ($result->num_rows > 0) {
 
-            //     header("Location: dashboard.php");
+            $data = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$username' OR email_user='$username' AND password_user='$password'");
+            $data_user = mysqli_fetch_assoc($data);
+            $username_user = $data_user['username_user'];
+
+            $row = mysqli_num_rows($data);
+
+            if($row > 0){
+                $_SESSION['username_user'] = $username_user;
+                $_SESSION['password_user'] = $password;
+
+
+                header("location:dashboard.php?pesan=loginberhasil");
+            }else{
+                // header("location:index.php?pesan=gagal");
+                echo "<script>alert('Username dan Password tidak sesuai')</script>";
+            }
+
             
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['username_user'] = $row['username_user'];
-            header("Location: dashboard.php");
-        } else {
-            echo "<script>alert('Username atau password Anda salah. Silahkan coba lagi!')</script>";
-        }
     }
     ?>
 
@@ -65,10 +72,10 @@
                                     <span><i class="icon icon-user"></i></span>
                                 </div>
                                 <div class="form-label-group">
-                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="Masukkan Username" autofocus required title="Username tidak boleh kosong">
+                                    <input type="text" id="username_user" name="username_user" class="form-control" placeholder="" autofocus required title="Username tidak boleh kosong">
                                     <label for="username_user">Username</label>
                                 </div>
-                                <div class="form-label-group"><input type="password" id="password_user" name="password_user" class="form-control" placeholder="Masukkan Kata Sandi" autofocus required title="Password harus diisi">
+                                <div class="form-label-group"><input type="password" id="password_user" name="password_user" class="form-control" placeholder="" autofocus required title="Password harus diisi">
                                     <label for="password_user">Kata Sandi</label>
                                 </div>
                                 <div class="text-right">
