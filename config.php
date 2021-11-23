@@ -111,6 +111,24 @@ if (isset($_POST['kirimUpdate'])) {
 }
 
 
+//Nonaktifkan/aktifkan pertanyaan
+if (isset($_GET['id_pert'])) {
+  $id_pert = $_GET['id_pert'];
+  $stat_pert = $_GET['stat'];
+
+  if ($stat_pert == 'TRUE') {
+    $ubah = "UPDATE tb_pertanyaan SET tersedia='FALSE'
+               WHERE id_pertanyaan = '$id_pert'";
+  } else {
+    $ubah = "UPDATE tb_pertanyaan SET tersedia='TRUE'
+              WHERE id_pertanyaan = '$id_pert'";
+  }
+
+  $upt_pert = mysqli_query($con, $ubah);
+  header("Location:user_profile.php");
+}
+
+
 //Kirim Jawaban
 //Jawaban iya
 if (isset($_GET['jwb_iya'])) {

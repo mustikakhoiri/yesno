@@ -223,7 +223,7 @@ $aidi_user = $usr['id_user'];
                     <thead class="bg-light">
                       <tr>
                         <th scope="col" class="border-0 align-middle">Pertanyaan</th>
-                        <th scope="col" class="border-0 align-middle">kategori</th>
+                        <th scope="col" class="border-0 align-middle text-center">kategori</th>
                         <th scope="col" class="border-0 align-middle text-center">Jawab Benar</th>
                         <th scope="col" class="border-0 align-middle text-center">Jawab Salah</th>
                         <th scope="col" class="border-0 align-middle text-center"></th>
@@ -241,6 +241,7 @@ $aidi_user = $usr['id_user'];
                         $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
                         $pertanyaan = $row_pertanyaan['pertanyaan'];
                         $kategori = $row_pertanyaan['nama_kategori'];
+                        $tersedia = $row_pertanyaan['tersedia'];
                         $jwb_iya = $row_pertanyaan['jwb_iya'];
                         $jwb_tidak = $row_pertanyaan['jwb_tidak'];
 
@@ -257,7 +258,12 @@ $aidi_user = $usr['id_user'];
                             </a>
                             <div class="dropdown-menu dropdown-menu-small">
                               <a class="dropdown-item text-success" href="#">Detail</a>
-                              <a class="dropdown-item text-warning" href="#">Edit</a>
+                              <?php
+                              if ($tersedia == 'TRUE') { ?>
+                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan?>&stat=<?= $tersedia?>" >Nonaktifkan</a>
+                              <?php } else { ?>
+                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan?>&stat=<?= $tersedia?>">Aktifkan</a>
+                              <?php } ?>
                               <a class="dropdown-item text-danger" href="#">Hapus </a>
                             </div>
                           </td>
