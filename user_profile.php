@@ -71,31 +71,31 @@ $aidi_user = $usr['id_user'];
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="components-blog-posts.html">
+              <a class="nav-link " href="components-blog-posts.php">
                 <i class="material-icons">vertical_split</i>
                 <span>Blog Posts</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="add-new-post.html">
+              <a class="nav-link " href="add-new-post.php">
                 <i class="material-icons">note_add</i>
                 <span>Add New Post</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="form-components.html">
+              <a class="nav-link " href="form-components.php">
                 <i class="material-icons">view_module</i>
                 <span>Forms &amp; Components</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="tables.html">
+              <a class="nav-link " href="tables.php">
                 <i class="material-icons">table_chart</i>
                 <span>Tables</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="errors.html">
+              <a class="nav-link " href="errors.php">
                 <i class="material-icons">error</i>
                 <span>Errors</span>
               </a>
@@ -159,17 +159,12 @@ $aidi_user = $usr['id_user'];
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
-                  <span class="d-none d-md-inline-block"><?= $usr['nama_user']?></span>
+                  <span class="d-none d-md-inline-block"><?= $usr['nama_user'] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                   <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profile</a>
-                  <a class="dropdown-item" href="components-blog-posts.html">
-                    <i class="material-icons">vertical_split</i> Blog Posts</a>
-                  <a class="dropdown-item" href="add-new-post.html">
-                    <i class="material-icons">note_add</i> Add New Post</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger" href="#">
+                  <a class="dropdown-item text-danger" href="logout.php">
                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>
               </li>
@@ -207,7 +202,7 @@ $aidi_user = $usr['id_user'];
                   <div class="mb-3 mx-auto">
                     <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110">
                   </div>
-                  <h4 class="mb-4"><?= $usr['nama_user']?></h4>
+                  <h4 class="mb-4"><?= $usr['nama_user'] ?></h4>
                   <a class="btn btn-primary" href="edit_profile.php">Edit Profile</a>
                 </div>
                 <ul class="list-group list-group-flush">

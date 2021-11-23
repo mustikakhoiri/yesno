@@ -159,17 +159,12 @@ $aidi_user = $usr['id_user'];
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
-                  <span class="d-none d-md-inline-block"><?= $usr['nama_user']?></span>
+                  <span class="d-none d-md-inline-block"><?= $usr['nama_user'] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                   <a class="dropdown-item" href="user_profile.php">
                     <i class="material-icons">&#xE7FD;</i> Profile</a>
-                  <a class="dropdown-item" href="components-blog-posts.html">
-                    <i class="material-icons">vertical_split</i> Blog Posts</a>
-                  <a class="dropdown-item" href="add-new-post.html">
-                    <i class="material-icons">note_add</i> Add New Post</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger" href="#">
+                  <a class="dropdown-item text-danger" href="logout.php">
                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>
               </li>
@@ -205,19 +200,19 @@ $aidi_user = $usr['id_user'];
                       <div class="col">
                         <form method="POST">
                           <div class="form-row">
-                            <input type="hidden" value="<?= $aidi_user?>" name="id_user">
+                            <input type="hidden" value="<?= $aidi_user ?>" name="id_user">
                             <div class="form-group col-md-6">
                               <label for="feFirstName">Nama</label>
-                              <input type="text" class="form-control" placeholder="First Name" value="<?= $usr['nama_user']?>" name="nama_user">
+                              <input type="text" class="form-control" placeholder="First Name" value="<?= $usr['nama_user'] ?>" name="nama_user">
                             </div>
                             <div class="form-group col-md-6">
                               <label for="feLastName">Username</label>
-                              <input type="text" class="form-control" placeholder="Last Name" value="<?= $usr['username_user']?>" disabled>
+                              <input type="text" class="form-control" placeholder="Last Name" value="<?= $usr['username_user'] ?>" name="username_user">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="feEmailAddress">Email</label>
-                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user']?>" name="email_user">
+                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user'] ?>" name="email_user" disabled>
                           </div>
                           <button type="submit" class="btn btn-accent" name="kirimUpdate">Update data akun</button>
                         </form>
@@ -238,6 +233,7 @@ $aidi_user = $usr['id_user'];
                       <div class="col">
                         <form action="edit_profile.php" method="POST">
                           <div class="form-row">
+                            <input type="hidden" value="<?= $aidi_user ?>" name="id_user">
                             <div class="form-group col-md-12">
                               <label for="current_password">Kata Sandi Sebelumnya</label>
                               <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Kata Sandi Sebelumnya">
@@ -252,10 +248,10 @@ $aidi_user = $usr['id_user'];
                           <div class="form-row">
                             <div class="form-group col-md-12">
                               <label for="confirm_new_password">Konfirmasi Kata Sandi Baru</label>
-                              <input type="password" class="form-control" id="confirm_new_password" name="new_password" placeholder="Konfirmasi Kata Sandi Baru">
+                              <input type="password" class="form-control" id="confirm_new_password" name="confirm_new_password" placeholder="Konfirmasi Kata Sandi Baru">
                             </div>
                           </div>
-                          <button type="submit" class="btn btn-accent">Ubah Kata Sandi</button>
+                          <button type="submit" class="btn btn-accent" name="updatePassword">Ubah Kata Sandi</button>
                         </form>
                       </div>
                     </div>

@@ -108,7 +108,13 @@ $usr    = mysqli_fetch_array($tampilUser);
             <li class="nav-item">
               <a class="nav-link " href="dashboard.php">
                 <i class="material-icons">edit</i>
-                <span>Blog Dashboard</span>
+                <span>Beranda</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="user_profile.php">
+                <i class="material-icons">person</i>
+                <span>User Profile</span>
               </a>
             </li>
             <li class="nav-item">

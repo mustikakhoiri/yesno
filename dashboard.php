@@ -81,7 +81,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="user_profile.php">
+              <a class="nav-link" href="user_profile.php">
                 <i class="material-icons">person</i>
                 <span>User Profile</span>
               </a>
@@ -227,7 +227,7 @@
             <div class="card-body d-flex flex-column">
               <form class="quick-post-form" method="post">
                 <div class="form-group">
-                  <input type="hidden" value="<?php echo $usr['id_user']?>" name="id_user">
+                  <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   <label for="nama_kategori">Kategori</label>
                   <select name="nama_kategori" id="nama_kategori" class="form-control" data-placeholder="Pilih kategori" required>
