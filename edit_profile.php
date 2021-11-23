@@ -202,17 +202,17 @@ $aidi_user = $usr['id_user'];
                           <div class="form-row">
                             <input type="hidden" value="<?= $aidi_user ?>" name="id_user">
                             <div class="form-group col-md-6">
-                              <label for="feFirstName">Nama</label>
-                              <input type="text" class="form-control" placeholder="First Name" value="<?= $usr['nama_user'] ?>" name="nama_user">
+                              <label for="Nama">Nama</label>
+                              <input type="text" class="form-control" placeholder="Nama Lengkap" value="<?= $usr['nama_user'] ?>" name="nama_user">
                             </div>
                             <div class="form-group col-md-6">
-                              <label for="feLastName">Username</label>
-                              <input type="text" class="form-control" placeholder="Last Name" value="<?= $usr['username_user'] ?>" name="username_user">
+                              <label for="Username">Username</label>
+                              <input type="text" class="form-control" placeholder="Username" value="<?= $usr['username_user'] ?>" name="username_user" disabled>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="feEmailAddress">Email</label>
-                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user'] ?>" name="email_user" disabled>
+                            <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="<?= $usr['email_user'] ?>" name="email_user">
                           </div>
                           <button type="submit" class="btn btn-accent" name="kirimUpdate">Update data akun</button>
                         </form>

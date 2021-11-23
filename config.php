@@ -97,11 +97,11 @@ if (isset($_POST['updatePassword'])) {
 if (isset($_POST['kirimUpdate'])) {
   $update_id    = $_POST['id_user'];
   $update_nama  = $_POST['nama_user'];
-  $update_username = $_POST['username_user'];
+  $update_email = $_POST['email_user'];
 
   $update_user = "UPDATE `tb_user`
                   SET `nama_user` = '$update_nama',
-                      `username_user` = '$update_username'
+                      `email_user` = '$update_email'
                   WHERE `tb_user`.`id_user` = $update_id;
   ";
 
