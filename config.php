@@ -16,8 +16,8 @@ $selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_per
 $runK = mysqli_query($con, $selectK);
 
 //Menampilkan Pertanyaan Berdasarkan Kategori
-$selectKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori;";
-$runKtg = mysqli_query($con, $selectKtg);
+// $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
+// $runKtg = mysqli_query($con, $selectKtg);
 
 
 //Kirim Pertanyaan
@@ -151,5 +151,3 @@ if (isset($_GET['jwb_tidak'])) {
   header("Location: dashboard.php");
   die();
 }
-
-

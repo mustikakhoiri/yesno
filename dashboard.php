@@ -234,13 +234,13 @@
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   <label for="nama_kategori">Kategori</label>
                   <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
-                    <?php 
-                      $data = mysqli_query($con, "SELECT * FROM tb_kategori");
-                      while($data_kategori = mysqli_fetch_assoc($data)){
-                      $id_kategori= $data_kategori['id_kategori'];
+                    <?php
+                    $data = mysqli_query($con, "SELECT * FROM tb_kategori");
+                    while ($data_kategori = mysqli_fetch_assoc($data)) {
+                      $id_kategori = $data_kategori['id_kategori'];
                       $nama_kategori = $data_kategori['nama_kategori'];
                     ?>
-                    <option value="<?=$id_kategori?>"><?=$nama_kategori?></option>
+                      <option value="<?= $id_kategori ?>"><?= $nama_kategori ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -380,26 +380,31 @@
                 <div class="card-header border-bottom">
                   <h4 class="m-0">Pertanyaan Berdasarkan Kategori</h4>
                 </div>
-                  
+
+
                 <?php
-                while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
-                  $id_pertanyaanKtg = $row_pertanyaan['pertanyaan'];
-                  $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
-                  $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
-                  $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak'];
-                  $nama_kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
+                $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
+                $runKtg = mysqli_query($con, $selectKtg);
+                while ($row_pertanyaan = mysqli_fetch_array($runKtg)) {;
+                  $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
+                  $pertanyaan = $row_pertanyaan['pertanyaan'];
+
+                  $kategori = $row_pertanyaan['nama_kategori'];
+
+                  $jwb_iya = $row_pertanyaan['jwb_iya'];
+                  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
                 ?>
 
                   <div class="card-body p-0">
                     <div class="blog-comments__item d-flex p-3">
                       <div class="blog-comments__content">
 
-                        <h5>Kategori: <?= $nama_kategori; ?></h5>
+                        <h5>Kategori: <?= $kategori; ?></h5>
                         <p class="m-0 my-1 mb-2">
-                          <!-- <?php echo $nama_kategori; ?> -->
+                          <?php echo $pertanyaan; ?>
                         </p>
 
-                        <div class="blog-comments__actions">
+                        <!-- <div class="blog-comments__actions">
                           <div class="btn-group btn-group-sm">
                             <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
                               <span class="text-success">
@@ -414,10 +419,10 @@
                               Salah
                             </a>
                           </div>
-                        </div>
+                        </div> -->
 
-                        <span class="text-muted"><?php echo $jwb_iyaKtg; ?> orang menjawab benar</span><br>
-                        <span class="text-muted"><?php echo $jwb_tidakKtg; ?> orang menjawab salah</span>
+                        <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span>
                       </div>
                     </div>
                   </div>
