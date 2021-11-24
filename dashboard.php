@@ -25,6 +25,9 @@
 
   session_start();
   if (!isset($_SESSION["username_user"])) header("Location: login.php");
+  // if($_SESSION['login'] == false) {
+  //   header('location : login.php');
+  // }
 
   $tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
   $usr    = mysqli_fetch_array($tampilUser);
@@ -230,17 +233,15 @@
                   <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   <label for="nama_kategori">Kategori</label>
-                  <select name="nama_kategori" id="nama_kategori" class="form-control" data-placeholder="Pilih kategori" required>
-                    <option selected disabled>Pilih Kategori</option>
-                    <option value="Bisnis">Bisnis</option>
-                    <option value="Budaya">Budaya</option>
-                    <option value="Hiburan">Hiburan</option>
-                    <option value="Kuliner">Kuliner</option>
-                    <option value="Musik">Musik</option>
-                    <option value="Olahraga">Olahraga</option>
-                    <option value="Politik">Politik</option>
-                    <option value="Religi">Religi</option>
-                    <option value="Sosial Ekonomi">Sosial Ekonomi</option>
+                  <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
+                    <?php 
+                      $data = mysqli_query($con, "SELECT * FROM tb_kategori");
+                      while($data_kategori = mysqli_fetch_assoc($data)){
+                      $id_kategori= $data_kategori['id_kategori'];
+                      $nama_kategori = $data_kategori['nama_kategori'];
+                    ?>
+                    <option value="<?=$id_kategori?>"><?=$nama_kategori?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-accent" name="kirim">Ajukan Pertanyaan</button>
@@ -379,25 +380,23 @@
                 <div class="card-header border-bottom">
                   <h4 class="m-0">Pertanyaan Berdasarkan Kategori</h4>
                 </div>
-
+                  
                 <?php
-
                 while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
-                  $id_pertanyaanKtg = $row_pertanyaanKtg['id_pertanyaan'];
+                  $id_pertanyaanKtg = $row_pertanyaan['pertanyaan'];
                   $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
                   $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
                   $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak'];
                   $nama_kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
-
                 ?>
 
                   <div class="card-body p-0">
                     <div class="blog-comments__item d-flex p-3">
                       <div class="blog-comments__content">
 
-                        <h5>Kategori: <?= $nama_kategoriKtg; ?></h5>
+                        <h5>Kategori: <?= $nama_kategori; ?></h5>
                         <p class="m-0 my-1 mb-2">
-                          <?php echo $pertanyaanKtg; ?>
+                          <!-- <?php echo $nama_kategori; ?> -->
                         </p>
 
                         <div class="blog-comments__actions">
@@ -422,7 +421,6 @@
                       </div>
                     </div>
                   </div>
-
                 <?php } ?>
 
                 <div class="card-footer border-top">

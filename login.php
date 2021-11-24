@@ -13,6 +13,8 @@
 
 <body>
     <?php
+
+    session_start();
     if(isset($_GET['pesan'])){
 		if($_GET['pesan'] == "gagal"){
 			echo '<script>alert("Login gagal! username dan password salah!")</script>';
@@ -22,6 +24,7 @@
 			echo "Anda harus login untuk mengakses halaman admin";
 		}
 	}
+    // $_SESSION['login'] = false;
 
     ?>
     

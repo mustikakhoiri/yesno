@@ -240,8 +240,12 @@ $aidi_user = $usr['id_user'];
                       while ($row_pertanyaan = mysqli_fetch_array($runS)) {;
                         $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
                         $pertanyaan = $row_pertanyaan['pertanyaan'];
+<<<<<<< Updated upstream
                         $kategori = $row_pertanyaan['nama_kategori'];
                         $tersedia = $row_pertanyaan['tersedia'];
+=======
+                        $kategori = $row_pertanyaan['id_kategori'];
+>>>>>>> Stashed changes
                         $jwb_iya = $row_pertanyaan['jwb_iya'];
                         $jwb_tidak = $row_pertanyaan['jwb_tidak'];
 

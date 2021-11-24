@@ -1,17 +1,5 @@
 <?php
 
-// $db_host = "localhost";
-// $db_user = "root";
-// $db_pass = "";
-// $db_name = "truefalse";
-
-// try
-// {    
-//     //create PDO connection 
-//     $con = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-// } catch(PDOException $e) {
-//     //show error
-//     die("Terjadi masalah: " . $e->getMessage());
 $host = "localhost";
 $username = "root";
 $password = "";
@@ -28,17 +16,17 @@ $selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_per
 $runK = mysqli_query($con, $selectK);
 
 //Menampilkan Pertanyaan Berdasarkan Kategori
-$selectKtg = "SELECT * FROM tb_pertanyaan WHERE nama_kategori = 'Bisnis' ORDER BY id_pertanyaan DESC";
+$selectKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori;";
 $runKtg = mysqli_query($con, $selectKtg);
 
 
 //Kirim Pertanyaan
 if (isset($_POST['kirim'])) {
   $kirimId         = $_POST['id_user'];
+  $kirimKategori   = $_POST['id_kategori'];
   $kirimPertanyaan = $_POST['pertanyaan'];
-  $kirimKategori   = $_POST['nama_kategori'];
 
-  $insert = "INSERT INTO tb_pertanyaan(id_user, pertanyaan, nama_kategori) VALUES('$kirimId', '$kirimPertanyaan', '$kirimKategori')";
+  $insert = "INSERT INTO tb_pertanyaan(id_user, id_kategori, pertanyaan) VALUES('$kirimId', '$kirimKategori', '$kirimPertanyaan')";
 
   $run_insert = mysqli_query($con, $insert);
 
@@ -74,22 +62,22 @@ if (isset($_POST['updatePassword'])) {
         $update = $con->query("UPDATE tb_user SET password_user='$new_password' WHERE id_user='$update_id'");
         if ($update) {
           //kondisi jika proses query UPDATE berhasil
-          echo 'Password berhasil di ubah!';
+          echo '<script>alert("Password Berhasil di Ubah!")</script>';
         } else {
           //kondisi jika proses query gagal
-          echo 'Gagal merubah password!';
+          echo '<script>alert("Gagal Merubah Password")</script>';
         }
       } else {
         //kondisi jika password baru beda dengan konfirmasi password
-        echo 'Konfirmasi password tidak cocok!';
+        echo '<script>alert("Password Tidak Cocok")</script>';
       }
     } else {
       //kondisi jika password baru yang dimasukkan kurang dari 6 karakter
-      echo 'Minimal password baru adalah 6 karakter!';
+      echo '<script>alert("Minimal password baru adalah 6 karakter")</script>';
     }
   } else {
     //kondisi jika password lama tidak cocok dengan data yang ada di database
-    echo 'Password lama tidak cocok!';
+    echo '<script>alert("Gagal Merubah Password")</script>';
   }
 }
 
@@ -163,3 +151,5 @@ if (isset($_GET['jwb_tidak'])) {
   header("Location: dashboard.php");
   die();
 }
+
+
