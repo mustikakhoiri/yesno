@@ -254,6 +254,32 @@
           <!-- </div> -->
           <!-- End New Draft Component -->
 
+          <!-- Lihat Pertanyaan Berdasarkan Kategori -->
+          <div class="card card-small h-100 mb-4">
+            <div class="card-header border-bottom">
+              <h4 class="m-0">Lihat Pertanyaan Berdasarkan Kategori</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <form class="quick-post-form" method="post">
+                <div class="form-group">
+                  <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
+                  <label for="nama_kategori">Pilih Kategori</label>
+                  <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
+                    <?php
+                    $data = mysqli_query($con, "SELECT * FROM tb_kategori");
+                    while ($data_kategori = mysqli_fetch_assoc($data)) {
+                      $id_kategori = $data_kategori['id_kategori'];
+                      $nama_kategori = $data_kategori['nama_kategori'];
+                    ?>
+                      <option value="<?= $id_kategori ?>"><?= $nama_kategori ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-accent" name="lihatKtg">Lihat Kategori</button>
+              </form>
+            </div>
+          </div>
+
           <div class="row">
             <!-- Discussions Component -->
             <div class="col mb-4">
@@ -380,24 +406,35 @@
                 </div>
 
                 <?php
-                while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
-                  $id_pertanyaanKtg = $row_pertanyaan['pertanyaan'];
-                  $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
-                  $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
-                  $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak'];
-                  $nama_kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
+                // $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
+                // $runKtg = mysqli_query($con, $selectKtg);
+                if (isset($_POST['lihatKtg'])) {
+                  // $id_kategori = $_POST['id_kategori'];
+                  // $nama_kategori = $_POST['nama_kategori'];
+                  $lihatKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND tb_kategori.nama_kategori = 'nama_kategori'";
+                  $runKtg = mysqli_query($con, $lihatKtg);
+                }
+
+                while ($row_pertanyaan = mysqli_fetch_array($runKtg)) {;
+                  $id_pertanyaanKtg = $row_pertanyaan['id_pertanyaan'];
+                  $pertanyaanKtg = $row_pertanyaan['pertanyaan'];
+
+                  $kategoriKtg = $row_pertanyaan['nama_kategori'];
+
+                  $jwb_iyaKtg = $row_pertanyaan['jwb_iya'];
+                  $jwb_tidakKtg = $row_pertanyaan['jwb_tidak'];
                 ?>
 
                   <div class="card-body p-0">
                     <div class="blog-comments__item d-flex p-3">
                       <div class="blog-comments__content">
 
-                        <h5>Kategori: <?= $nama_kategori; ?></h5>
+                        <!-- <h5>Kategori: <?= $kategoriKtg; ?></h5>
                         <p class="m-0 my-1 mb-2">
-                          <!-- <?php echo $nama_kategori; ?> -->
-                        </p>
+                          <?php echo $pertanyaanKtg; ?>
+                        </p> -->
 
-                        <div class="blog-comments__actions">
+                        <!-- <div class="blog-comments__actions">
                           <div class="btn-group btn-group-sm">
                             <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
                               <span class="text-success">
@@ -412,14 +449,15 @@
                               Salah
                             </a>
                           </div>
-                        </div>
-
-                        <span class="text-muted"><?php echo $jwb_iyaKtg; ?> orang menjawab benar</span><br>
-                        <span class="text-muted"><?php echo $jwb_tidakKtg; ?> orang menjawab salah</span>
+                        </div> -->
+                        <!-- 
+                      <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
+                      <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span> -->
                       </div>
                     </div>
                   </div>
                 <?php } ?>
+
 
                 <div class="card-footer border-top">
                   <div class="row">

@@ -232,8 +232,9 @@ $aidi_user = $usr['id_user'];
                     <tbody>
                       <?php
 
-                      //Menampilkan Pertanyaan Tersedia
-                      $select = "SELECT * FROM tb_pertanyaan WHERE id_user = '$aidi_user' ORDER BY id_pertanyaan DESC";
+                      //Menampilkan Pertanyaan Yang Pernah di Tanyakan
+                      // $select = "SELECT * FROM tb_pertanyaan WHERE id_user = '$aidi_user' ORDER BY id_pertanyaan DESC";
+                      $select = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
                       $runS = mysqli_query($con, $select);
 
 
@@ -241,10 +242,10 @@ $aidi_user = $usr['id_user'];
                         $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
                         $pertanyaan = $row_pertanyaan['pertanyaan'];
 
-                        $kategori = $row_pertanyaan['id_kategori'];
+                        $kategori = $row_pertanyaan['nama_kategori'];
                         $tersedia = $row_pertanyaan['tersedia'];
 
-                        $kategori = $row_pertanyaan['id_kategori'];
+                        // $kategori = $row_pertanyaan['id_kategori'];
 
                         $jwb_iya = $row_pertanyaan['jwb_iya'];
                         $jwb_tidak = $row_pertanyaan['jwb_tidak'];
@@ -264,9 +265,9 @@ $aidi_user = $usr['id_user'];
                               <a class="dropdown-item text-success" href="#">Detail</a>
                               <?php
                               if ($tersedia == 'TRUE') { ?>
-                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan?>&stat=<?= $tersedia?>" >Nonaktifkan</a>
+                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan ?>&stat=<?= $tersedia ?>">Nonaktifkan</a>
                               <?php } else { ?>
-                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan?>&stat=<?= $tersedia?>">Aktifkan</a>
+                                <a class="dropdown-item text-warning" href="?id_pert=<?= $id_pertanyaan ?>&stat=<?= $tersedia ?>">Aktifkan</a>
                               <?php } ?>
                               <a class="dropdown-item text-danger" href="#">Hapus </a>
                             </div>
