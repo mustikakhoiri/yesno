@@ -209,12 +209,13 @@ function userMenyalahkan($pertanyaan_id)
 // Reset Password
 if (isset($_POST['submit-reset'])) {
   $update_id = $_POST['id_user'];
+  $update_email = $_POST['email_user'];
   $current_password      = $_POST['current_password'];
   $new_password      = $_POST['new_password'];
   $confirm_new_password  = $_POST['confirm_new_password'];
 
   $current_password  = md5($current_password);
-  $cek       = $con->query("SELECT password_user FROM tb_user WHERE password_user='$current_password'");
+  $cek       = $con->query("SELECT password_user FROM tb_user WHERE password_user='$current_password' AND email_user='$update_email'");
 
   if ($cek->num_rows) {
     //kondisi ini jika password lama yang dimasukkan sama dengan yang ada di database

@@ -234,8 +234,9 @@
                 <div class="form-group">
                   <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
-                  <label for="nama_kategori">Kategori</label>
+                  <label class="mt-3" for="nama_kategori">Kategori</label>
                   <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
+                    <option value="" selected disabled>Pilih Kategori</option>
                     <?php
                     $data = mysqli_query($con, "SELECT * FROM tb_kategori");
                     while ($data_kategori = mysqli_fetch_assoc($data)) {
@@ -250,39 +251,41 @@
               </form>
             </div>
           </div>
+
           <!-- End Quick Post -->
           <!-- </div> -->
           <!-- End New Draft Component -->
 
-          <!-- Lihat Pertanyaan Berdasarkan Kategori -->
-          <div class="card card-small h-100 mb-4">
-            <div class="card-header border-bottom">
-              <h4 class="m-0">Lihat Pertanyaan Berdasarkan Kategori</h4>
-            </div>
-            <div class="card-body d-flex flex-column">
-              <form class="quick-post-form" method="post">
-                <div class="form-group">
-                  <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
-                  <label for="nama_kategori">Pilih Kategori</label>
-                  <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
-                    <?php
-                    $data = mysqli_query($con, "SELECT * FROM tb_kategori");
-                    while ($data_kategori = mysqli_fetch_assoc($data)) {
-                      $id_kategori = $data_kategori['id_kategori'];
-                      $nama_kategori = $data_kategori['nama_kategori'];
-                    ?>
-                      <option value="<?= $id_kategori ?>"><?= $nama_kategori ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-accent" name="lihatKtg">Lihat Kategori</button>
-              </form>
-            </div>
-          </div>
+
+
 
           <div class="row">
             <!-- Discussions Component -->
             <div class="col mb-4">
+              <div class="card card-small blog-comments mb-4">
+                <div class="card-header border-bottom">
+                  <h4 class="m-0">Lihat Pertanyaan Berdasarkan Kategori</h4>
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <form class="quick-post-form" method="post">
+                    <div class="form-group mt-3">
+                      <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
+                      <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
+                        <option value="" selected disabled>Pilih Kategori</option>
+                        <?php
+                        $data = mysqli_query($con, "SELECT * FROM tb_kategori");
+                        while ($data_kategori = mysqli_fetch_assoc($data)) {
+                          $id_kategori = $data_kategori['id_kategori'];
+                          $nama_kategori = $data_kategori['nama_kategori'];
+                        ?>
+                          <option value="<?= $id_kategori ?>"><?= $nama_kategori ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-accent" name="lihatKtg">Lihat Kategori</button>
+                  </form>
+                </div>
+              </div>
               <div class="card card-small blog-comments">
                 <div class="card-header border-bottom">
                   <h4 class="m-0">Pertanyaan Tersedia</h4>
@@ -301,16 +304,14 @@
                         <div class="blog-comments__actions">
                           <div class="btn-group btn-group-sm">
                             <a <?php
-                                if (userMembenarkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white benar-btn disabled" 
-                                <?php else : ?> class="btn btn-white benar-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=benar&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
+                                if (userMembenarkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white benar-btn disabled" <?php else : ?> class="btn btn-white benar-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=benar&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
                               <span class="text-success">
                                 <i class="material-icons">check</i>
                               </span>
                               Benar
                             </a>
                             <a <?php
-                                if (userMenyalahkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white salah-btn disabled" 
-                                <?php else : ?> class="btn btn-white salah-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=salah&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
+                                if (userMenyalahkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white salah-btn disabled" <?php else : ?> class="btn btn-white salah-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=salah&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
                               <span class="text-danger">
                                 <i class="material-icons">clear</i>
                               </span>
@@ -409,8 +410,8 @@
                 // $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
                 // $runKtg = mysqli_query($con, $selectKtg);
                 if (isset($_POST['lihatKtg'])) {
-                  // $id_kategori = $_POST['id_kategori'];
-                  // $nama_kategori = $_POST['nama_kategori'];
+                  $id_kategori = $_POST['id_kategori'];
+                  $nama_kategori = $_POST['nama_kategori'];
                   $lihatKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND tb_kategori.nama_kategori = 'nama_kategori'";
                   $runKtg = mysqli_query($con, $lihatKtg);
                 }

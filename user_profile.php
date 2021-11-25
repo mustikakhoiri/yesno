@@ -207,8 +207,14 @@ $aidi_user = $usr['id_user'];
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item p-4">
-                    <strong class="text-muted d-block mb-2">Description</strong>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span>
+                    <strong class="text-muted d-block mb-2">Username:</strong>
+                    <span><?= $usr['username_user'] ?></span><br>
+                    <strong class="text-muted d-block mb-2 mt-4">Email:</strong>
+                    <span><?= $usr['email_user'] ?></span>
+                  </li>
+                  <li class="list-group-item p-4">
+                    <strong class="text-muted d-block mb-2">Jumlah pertanyaan yang dijawab:</strong>
+                    <span>jumlah</span>
                   </li>
                 </ul>
               </div>
