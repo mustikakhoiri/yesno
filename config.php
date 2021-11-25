@@ -19,6 +19,13 @@ $runK = mysqli_query($con, $selectK);
 // $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
 // $runKtg = mysqli_query($con, $selectKtg);
 
+// Lihat Kategori
+// if (isset($_POST['lihatKtg'])) {
+//   $id_kategori = $_POST['id_kategori'];
+//   $nama_kategori = $_POST['nama_kategori'];
+//   $lihatKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND tb_kategori.nama_kategori = '$nama_kategori'";
+//   $runKtg = mysqli_query($con, $lihatKtg);
+// }
 
 //Kirim Pertanyaan
 if (isset($_POST['kirim'])) {
@@ -150,4 +157,49 @@ if (isset($_GET['jwb_tidak'])) {
   $run_update = mysqli_query($con, $update);
   header("Location: dashboard.php");
   die();
+}
+
+
+// Reset Password
+if (isset($_POST['submit-reset'])) {
+  $update_id = $_POST['id_user'];
+  $current_password      = $_POST['current_password'];
+  $new_password      = $_POST['new_password'];
+  $confirm_new_password  = $_POST['confirm_new_password'];
+
+  $current_password  = md5($current_password);
+  $cek       = $con->query("SELECT password_user FROM tb_user WHERE password_user='$current_password'");
+
+  if ($cek->num_rows) {
+    //kondisi ini jika password lama yang dimasukkan sama dengan yang ada di database
+    //membuat kondisi minimal password adalah 6 karakter
+    if (strlen($new_password) >= 6) {
+      //jika password baru sudah 6 atau lebih, maka lanjut ke bawah
+      //membuat kondisi jika password baru harus sama dengan konfirmasi password
+      if ($new_password == $confirm_new_password) {
+        //jika semua kondisi sudah benar, maka melakukan update kedatabase
+        //query UPDATE SET password = encrypt md5 new_password
+        //kondisi WHERE username = session username pada saat login, maka yang di ubah hanya user dengan username tersebut
+        $new_password   = md5($new_password);
+
+        $update = $con->query("UPDATE tb_user SET password_user='$new_password' WHERE id_user='$update_id'");
+        if ($update) {
+          //kondisi jika proses query UPDATE berhasil
+          echo '<script>alert("Password Berhasil di Reset!")</script>';
+        } else {
+          //kondisi jika proses query gagal
+          echo '<script>alert("Gagal Mereset Password")</script>';
+        }
+      } else {
+        //kondisi jika password baru beda dengan konfirmasi password
+        echo '<script>alert("Password Tidak Cocok")</script>';
+      }
+    } else {
+      //kondisi jika password baru yang dimasukkan kurang dari 6 karakter
+      echo '<script>alert("Minimal password baru adalah 6 karakter")</script>';
+    }
+  } else {
+    //kondisi jika password lama tidak cocok dengan data yang ada di database
+    echo '<script>alert("Gagal Merubah Password")</script>';
+  }
 }
