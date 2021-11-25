@@ -201,9 +201,11 @@ function userMenyalahkan($pertanyaan_id)
     return true;
   } else {
     return false;
+  }
+}
 
 
-    
+
 // Reset Password
 if (isset($_POST['submit-reset'])) {
   $update_id = $_POST['id_user'];
