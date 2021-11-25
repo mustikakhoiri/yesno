@@ -23,6 +23,7 @@
 
   include('config.php');
 
+  //session
   session_start();
   if (!isset($_SESSION["username_user"])) header("Location: login.php");
   // if($_SESSION['login'] == false) {
@@ -31,6 +32,7 @@
 
   $tampilUser = mysqli_query($con, "SELECT * FROM tb_user WHERE username_user='$_SESSION[username_user]'");
   $usr    = mysqli_fetch_array($tampilUser);
+  $user_id = $usr['id_user'];
 
   ?>
 
@@ -234,13 +236,13 @@
                   <textarea class="form-control" placeholder="Apa yg ingin anda tanyakan ?" name="pertanyaan"></textarea>
                   <label for="nama_kategori">Kategori</label>
                   <select name="id_kategori" id="id_kategori" class="form-control" data-placeholder="Pilih kategori" required>
-                    <?php 
-                      $data = mysqli_query($con, "SELECT * FROM tb_kategori");
-                      while($data_kategori = mysqli_fetch_assoc($data)){
-                      $id_kategori= $data_kategori['id_kategori'];
+                    <?php
+                    $data = mysqli_query($con, "SELECT * FROM tb_kategori");
+                    while ($data_kategori = mysqli_fetch_assoc($data)) {
+                      $id_kategori = $data_kategori['id_kategori'];
                       $nama_kategori = $data_kategori['nama_kategori'];
                     ?>
-                    <option value="<?=$id_kategori?>"><?=$nama_kategori?></option>
+                      <option value="<?= $id_kategori ?>"><?= $nama_kategori ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -260,33 +262,29 @@
                   <h4 class="m-0">Pertanyaan Tersedia</h4>
                 </div>
 
-                <?php
-
-                while ($row_pertanyaan = mysqli_fetch_array($run)) {;
-                  $id_pertanyaan = $row_pertanyaan['id_pertanyaan'];
-                  $pertanyaan = $row_pertanyaan['pertanyaan'];
-                  $jwb_iya = $row_pertanyaan['jwb_iya'];
-                  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
-
-                ?>
+                <?php foreach ($tampil_pertanyaan as $tmplPert) : ?>
 
                   <div class="card-body p-0">
                     <div class="blog-comments__item d-flex p-3">
                       <div class="blog-comments__content">
 
                         <p class="m-0 my-1 mb-2">
-                          <?php echo $pertanyaan; ?>
+                          <?php echo $tmplPert['pertanyaan']; ?>
                         </p>
 
                         <div class="blog-comments__actions">
                           <div class="btn-group btn-group-sm">
-                            <a type="button" class="btn btn-white" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                            <a <?php
+                                if (userMembenarkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white benar-btn disabled" 
+                                <?php else : ?> class="btn btn-white benar-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=benar&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
                               <span class="text-success">
                                 <i class="material-icons">check</i>
                               </span>
                               Benar
                             </a>
-                            <a type="button" class="btn btn-white" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                            <a <?php
+                                if (userMenyalahkan($tmplPert['id_pertanyaan'])) : ?> class="btn btn-white salah-btn disabled" 
+                                <?php else : ?> class="btn btn-white salah-btn" href="?jwb=<?= $tmplPert['id_pertanyaan'] ?>&stat=salah&user_id=<?= $usr['id_user'] ?>" name="jwb_btn" <?php endif ?> data-id="<?php echo $tmplPert['id_pertanyaan'] ?>">
                               <span class="text-danger">
                                 <i class="material-icons">clear</i>
                               </span>
@@ -295,13 +293,13 @@
                           </div>
                         </div>
 
-                        <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
-                        <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span>
+                        <span class="benar"><?php echo getBenar($tmplPert['id_pertanyaan']); ?> orang menjawab benar</span><br>
+                        <span class="salah"><?php echo getSalah($tmplPert['id_pertanyaan']); ?> orang menjawab salah</span>
                       </div>
                     </div>
                   </div>
 
-                <?php } ?>
+                <?php endforeach ?>
 
                 <div class="card-footer border-top">
                   <div class="row">
@@ -380,7 +378,7 @@
                 <div class="card-header border-bottom">
                   <h4 class="m-0">Pertanyaan Berdasarkan Kategori</h4>
                 </div>
-                  
+
                 <?php
                 while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
                   $id_pertanyaanKtg = $row_pertanyaan['pertanyaan'];

@@ -7,9 +7,11 @@ $db = "truefalse";
 
 $con = mysqli_connect($host, $username, $password, $db) or die();
 
+
 //Menampilkan Pertanyaan Tersedia
 $select = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'TRUE' ORDER BY id_pertanyaan DESC";
 $run = mysqli_query($con, $select);
+$tampil_pertanyaan = mysqli_fetch_all($run, MYSQLI_ASSOC);
 
 //Menampilkan Pertanyaan Kadaluarsa
 $selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_pertanyaan DESC";
@@ -117,39 +119,80 @@ if (isset($_GET['id_pert'])) {
 }
 
 
-//Kirim Jawaban
-//Jawaban iya
-if (isset($_GET['jwb_iya'])) {
-  $edit_id = $_GET['jwb_iya'];
 
-  $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
-  $run = mysqli_query($con, $select);
-  $row_pertanyaan = mysqli_fetch_array($run);
-  $pertanyaan = $row_pertanyaan['pertanyaan'];
-  $jwb_iya = $row_pertanyaan['jwb_iya'];
 
-  $update = "UPDATE tb_pertanyaan SET jwb_iya=jwb_iya +1 WHERE id_pertanyaan = '$edit_id'";
+// ===============================[MENCOBA]======================================= //
+// jika user klik tombol benar atau salah
+if (isset($_GET['jwb'])) {
+  $pertanyaan_id = $_GET['jwb'];
+  $stat = $_GET['stat'];
+  $user_id = $_GET['user_id'];
 
-  $run_update = mysqli_query($con, $update);
-  header("Location: dashboard.php");
-  die();
+  if ($stat == 'benar') {
+    $sqlCoba = "INSERT INTO info_jawaban (user_id, pertanyaan_id, rating_action) 
+              VALUES ($user_id, $pertanyaan_id, 'benar') 
+              ON DUPLICATE KEY UPDATE rating_action='benar'
+             ";
+  } else {
+    $sqlCoba = "INSERT INTO info_jawaban (user_id, pertanyaan_id, rating_action) 
+              VALUES ($user_id, $pertanyaan_id, 'salah') 
+              ON DUPLICATE KEY UPDATE rating_action='salah'
+             ";
+  }
+
+  // menjalankan query untuk mengubah data
+  mysqli_query($con, $sqlCoba);
+  header("Location:dashboard.php");
 }
 
-//Jawaban Tidak
-if (isset($_GET['jwb_tidak'])) {
-  $edit_id = $_GET['jwb_tidak'];
-
-  $select = "SELECT * FROM tb_pertanyaan WHERE id_pertanyaan='$edit_id'";
-  $run = mysqli_query($con, $select);
-  $row_pertanyaan = mysqli_fetch_array($run);
-  $pertanyaan = $row_pertanyaan['pertanyaan'];
-  $jwb_tidak = $row_pertanyaan['jwb_tidak'];
-
-  $update = "UPDATE tb_pertanyaan SET jwb_tidak=jwb_tidak +1 WHERE id_pertanyaan = '$edit_id'";
-
-  $run_update = mysqli_query($con, $update);
-  header("Location: dashboard.php");
-  die();
+// mengambil jumlah benar
+function getBenar($id_pertanyaan)
+{
+  global $con;
+  $sqlCoba = "SELECT COUNT(*) FROM info_jawaban 
+  		  WHERE pertanyaan_id = $id_pertanyaan AND rating_action='benar'";
+  $rs = mysqli_query($con, $sqlCoba);
+  $result = mysqli_fetch_array($rs);
+  return $result[0];
 }
 
+// mengambil jumlah salah
+function getSalah($id_pertanyaan)
+{
+  global $con;
+  $sqlCoba = "SELECT COUNT(*) FROM info_jawaban 
+  		  WHERE pertanyaan_id = $id_pertanyaan AND rating_action='salah'";
+  $rs = mysqli_query($con, $sqlCoba);
+  $result = mysqli_fetch_array($rs);
+  return $result[0];
+}
 
+// Check if user already likes post or not
+function userMembenarkan($pertanyaan_id)
+{
+  global $con;
+  global $user_id;
+  $sqlCoba = "SELECT * FROM info_jawaban WHERE user_id=$user_id 
+  		  AND pertanyaan_id=$pertanyaan_id AND rating_action='benar'";
+  $result = mysqli_query($con, $sqlCoba);
+  if (mysqli_num_rows($result) > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Check if user already dislikes post or not
+function userMenyalahkan($pertanyaan_id)
+{
+  global $con;
+  global $user_id;
+  $sqlCoba = "SELECT * FROM info_jawaban WHERE user_id=$user_id 
+  		  AND pertanyaan_id=$pertanyaan_id AND rating_action='salah'";
+  $result = mysqli_query($con, $sqlCoba);
+  if (mysqli_num_rows($result) > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
