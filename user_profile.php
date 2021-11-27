@@ -240,7 +240,9 @@ $aidi_user = $usr['id_user'];
 
                       //Menampilkan Pertanyaan Yang Pernah di Tanyakan
                       // $select = "SELECT * FROM tb_pertanyaan WHERE id_user = '$aidi_user' ORDER BY id_pertanyaan DESC";
-                      $select = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
+                      $select = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak 
+                                 FROM tb_kategori, tb_pertanyaan
+                                 WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND id_user = '$aidi_user' ORDER BY id_pertanyaan DESC";
                       $runS = mysqli_query($con, $select);
 
 
@@ -259,7 +261,7 @@ $aidi_user = $usr['id_user'];
                       ?>
 
                         <tr>
-                          <td><?php echo $pertanyaan; ?></td>
+                          <td class="align-middle"><?php echo $pertanyaan; ?></td>
                           <td class="text-center align-middle"><?php echo $kategori; ?></td>
                           <td class="text-center align-middle"><?php echo $jwb_iya; ?></td>
                           <td class="text-center align-middle"><?php echo $jwb_tidak; ?></td>
