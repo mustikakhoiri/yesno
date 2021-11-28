@@ -17,17 +17,18 @@ $tampil_pertanyaan = mysqli_fetch_all($run, MYSQLI_ASSOC);
 $selectK = "SELECT * FROM tb_pertanyaan WHERE tersedia = 'False' ORDER BY id_pertanyaan DESC";
 $runK = mysqli_query($con, $selectK);
 
-//Menampilkan Pertanyaan Berdasarkan Kategori
-// $selectKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori";
-// $runKtg = mysqli_query($con, $selectKtg);
 
-// Lihat Kategori
-// if (isset($_POST['lihatKtg'])) {
-//   $id_kategori = $_POST['id_kategori'];
-//   $nama_kategori = $_POST['nama_kategori'];
-//   $lihatKtg = "SELECT id_pertanyaan, pertanyaan, nama_kategori, tersedia, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND tb_kategori.nama_kategori = '$nama_kategori'";
-//   $runKtg = mysqli_query($con, $lihatKtg);
-// }
+
+//Lihat Kategori
+//  if (isset($_GET['lihatKtg'])) {
+//     $id_kategori = $_POST['id_kategori'];
+//     $nama_kategori = $_POST['nama_kategori'];
+//     $id_pertanyaan = $_GET['id_pertanyaan'];
+//     $pertanyaan = $_GET['pertanyaan'];
+//     $lihatKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_kategori.id_kategori = tb_pertanyaan.id_kategori AND tb_kategori.nama_kategori = nama_kategori ORDER BY nama_kategori'";
+//     $runKtg = mysqli_query($con, $lihatKtg);
+//  }   
+
 
 //Kirim Pertanyaan
 if (isset($_POST['kirim'])) {
