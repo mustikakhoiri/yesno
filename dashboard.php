@@ -267,9 +267,9 @@
                   <h4 class="m-0">Lihat Pertanyaan Berdasarkan Kategori</h4>
                 </div>
                 <div class="card-body d-flex flex-column">
-                  <form class="quick-post-form" method="post">
+                  <form class="quick-post-form" action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="GET">
                     <div class="form-group mt-3">
-                      <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user">
+                      <!-- <input type="hidden" value="<?php echo $usr['id_user'] ?>" name="id_user"> -->
                       <select name="nama_kategori" id="nama_kategori" class="form-control" data-placeholder="Pilih kategori" required>
                         <option value="" selected disabled>Pilih Kategori</option>
                         <?php
@@ -282,7 +282,7 @@
                         <?php } ?>
                       </select>
                     </div>
-                    <button type="submit" class="btn btn-accent" name="lihatKtg">Lihat Kategori</button>
+                    <button type="submit" class="btn btn-accent">Lihat Kategori</button>
                   </form>
                 </div>
               </div>
@@ -406,64 +406,60 @@
                 </div>
 
                 <?php
-                 $selectKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_kategori.id_kategori = tb_pertanyaan.id_kategori AND tb_kategori.nama_kategori = nama_kategori ORDER BY nama_kategori;";
-                 $runKtg = mysqli_query($con, $selectKtg);
-               
-                //  if (isset($_GET['lihatKtg'])) {
-                //   $id_kategori = $_POST['id_kategori'];
-                //   $nama_kategori = $_POST['nama_kategori'];
-                //   $id_pertanyaan = $_GET['id_pertanyaan'];
-                //   $pertanyaan = $_GET['pertanyaan'];
-                //   $lihatKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_kategori.id_kategori = tb_pertanyaan.id_kategori AND tb_kategori.nama_kategori = nama_kategori ORDER BY nama_kategori'";
-                //   $runKtg = mysqli_query($con, $lihatKtg);
-                //  }
+                //  $selectKtg = "SELECT nama_kategori, pertanyaan, jwb_iya, jwb_tidak FROM tb_kategori, tb_pertanyaan WHERE tb_kategori.id_kategori = tb_pertanyaan.id_kategori AND tb_kategori.nama_kategori = nama_kategori ORDER BY nama_kategori;";
+                //  $runKtg = mysqli_query($con, $selectKtg);
 
-                  while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {;
-                  // $id_pertanyaanKtg = $row_pertanyaanKtg['id_pertanyaan'];
-                  $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
-                  $kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
-                  $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
-                  $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak'];
-                
-                  
-              ?>
-              
+                if (isset($_GET['nama_kategori'])) {
+                  // $id_kategori = $_POST['id_kategori'];
+                  $nama_kategori = $_GET['nama_kategori'];
+                  // $id_pertanyaan = $_GET['id_pertanyaan'];
+                  // $pertanyaan = $_GET['pertanyaan'];
+                  $lihat = "SELECT tb_pertanyaan.id_pertanyaan, tb_pertanyaan.pertanyaan,tb_pertanyaan.jwb_iya, tb_pertanyaan.jwb_tidak, tb_kategori.id_kategori, tb_kategori.nama_kategori FROM tb_pertanyaan, tb_kategori WHERE tb_pertanyaan.id_kategori = tb_kategori.id_kategori AND tb_kategori.nama_kategori = '$nama_kategori' ORDER BY tb_pertanyaan.id_pertanyaan DESC";
+                  $runKtg = mysqli_query($con, $lihat);
+                  if (!$runKtg) {
+                    printf("Error: %s\n", mysqli_error($con));
+                    exit();
+                  }
 
-                
-                             
-                
-                  <div class="card-body p-0">
-                    <div class="blog-comments__item d-flex p-3">
-                      <div class="blog-comments__content">
+                  while ($row_pertanyaanKtg = mysqli_fetch_array($runKtg)) {
+                    $id_pertanyaanKtg = $row_pertanyaanKtg['id_pertanyaan'];
+                    $pertanyaanKtg = $row_pertanyaanKtg['pertanyaan'];
+                    $kategoriKtg = $row_pertanyaanKtg['nama_kategori'];
+                    $jwb_iyaKtg = $row_pertanyaanKtg['jwb_iya'];
+                    $jwb_tidakKtg = $row_pertanyaanKtg['jwb_tidak']; ?>
+                    <div class="card-body p-0">
+                      <div class="blog-comments__item d-flex p-3">
+                        <div class="blog-comments__content">
 
-                        <h5>Kategori: <?= $kategoriKtg; ?></h5>
-                        <p class="m-0 my-1 mb-2">
-                          <?php echo $pertanyaanKtg; ?>
-                        </p>
+                          <h5>Kategori: <?= $kategoriKtg; ?></h5>
+                          <p class="m-0 my-1 mb-2">
+                            <?php echo $pertanyaanKtg; ?>
+                          </p>
 
-                        <!-- <div class="blog-comments__actions">
-                          <div class="btn-group btn-group-sm">
-                            <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
-                              <span class="text-success">
-                                <i class="material-icons">check</i>
-                              </span>
-                              Benar
-                            </a>
-                            <a type="button" class="btn btn-white disabled" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
-                              <span class="text-danger">
-                                <i class="material-icons">clear</i>
-                              </span>
-                              Salah
-                            </a>
-                          </div>
-                        </div> -->
-                        
-                     <!-- <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
-                      <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span> -->
+                          <!-- <div class="blog-comments__actions">
+                            <div class="btn-group btn-group-sm">
+                              <a type="button" class="btn btn-white disabled" href="?jwb_iya=<?php echo $id_pertanyaan ?>" name="jwb_yes">
+                                <span class="text-success">
+                                  <i class="material-icons">check</i>
+                                </span>
+                                Benar
+                              </a>
+                              <a type="button" class="btn btn-white disabled" href="?jwb_tidak=<?php echo $id_pertanyaan ?>" name="jwb_no">
+                                <span class="text-danger">
+                                  <i class="material-icons">clear</i>
+                                </span>
+                                Salah
+                              </a>
+                            </div>
+                          </div> -->
+
+                          <!-- <span class="text-muted"><?php echo $jwb_iya; ?> orang menjawab benar</span><br>
+                        <span class="text-muted"><?php echo $jwb_tidak; ?> orang menjawab salah</span> -->
+                        </div>
                       </div>
                     </div>
-                  </div>
-                    <?php } ?>
+                  <?php } ?>
+                <?php } ?>
 
                 <div class="card-footer border-top">
                   <div class="row">
